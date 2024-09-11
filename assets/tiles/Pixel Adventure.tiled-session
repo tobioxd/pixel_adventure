@@ -3,14 +3,14 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Level-02.tmx",
+    "activeFile": "Level-01.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
         "Level-01.tmx": {
             "scale": 1.5,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
                 "x": 343.3333333333333,
                 "y": 183.66666666666663
@@ -24,14 +24,18 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 320.1785382183374,
-                "y": 183.8943648874838
+                "y": 184.19192858471268
             }
         },
         "Pixel Adventure.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "test.tsx": {
+            "scaleInDock": 1
         }
     },
+    "last.externalTilesetPath": "C:/Users/pc/Desktop/mobile/pixel_adventure/assets/tiles",
     "last.imagePath": "C:/Users/pc/Desktop/mobile/pixel_adventure/assets/images/Terrain",
     "map.height": 23,
     "map.lastUsedFormat": "tmx",
@@ -46,9 +50,10 @@
     "project": "Pixel Adventure.tiled-project",
     "recentFiles": [
         "Pixel Adventure.tsx",
-        "Level-01.tmx",
-        "Level-02.tmx"
+        "Level-02.tmx",
+        "Level-01.tmx"
     ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 16,
