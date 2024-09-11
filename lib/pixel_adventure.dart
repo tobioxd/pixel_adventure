@@ -1,20 +1,20 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:pixel_adventure/actors/player.dart';
-import 'package:pixel_adventure/levels/level.dart';
+import 'package:pixel_adventure/components/player.dart';
+import 'package:pixel_adventure/components/level.dart';
 
-class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCallbacks {
+class PixelAdventure extends FlameGame
+    with HasKeyboardHandlerComponents, DragCallbacks {
   @override
   Color backgroundColor() => const Color(0xFF211F30);
   late final CameraComponent cam;
   Player player = Player(character: 'Mask Dude');
   late JoystickComponent joystick;
-  bool showJoystick = true;
+  bool showJoystick = false;
 
   @override
   FutureOr<void> onLoad() async {
@@ -23,7 +23,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
 
     final world = Level(
       player: player,
-      levelName: 'Level-02',
+      levelName: 'Level-01',
     );
 
     cam = CameraComponent.withFixedResolution(
@@ -32,7 +32,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
 
     addAll([cam, world]);
 
-    if(showJoystick){
+    if (showJoystick) {
       addJoyStick();
     }
 
@@ -40,49 +40,42 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
   }
 
   @override
-  void update(dt){
-    if(showJoystick){
+  void update(dt) {
+    if (showJoystick) {
       updateJoyStick();
     }
     super.update(dt);
   }
-  
-  void addJoyStick() {
 
+  void addJoyStick() {
     joystick = JoystickComponent(
       knob: SpriteComponent(
         sprite: Sprite(images.fromCache('HUD/Knob.png')),
         size: Vector2.all(50),
-        ),
+      ),
       background: SpriteComponent(
         sprite: Sprite(images.fromCache('HUD/Joystick.png')),
         size: Vector2.all(100),
       ),
       margin: const EdgeInsets.only(left: 10, bottom: 10),
-      );
+    );
     add(joystick);
   }
-  
+
   void updateJoyStick() {
-    switch(joystick.direction){
-      case JoystickDirection.up:
-        player.playerDirection = PlayerDirection.none;
-        break;
-      case JoystickDirection.down:
-        player.playerDirection = PlayerDirection.none;
-        break;
+    switch (joystick.direction) {
       case JoystickDirection.left:
       case JoystickDirection.upLeft:
       case JoystickDirection.downLeft:
-        player.playerDirection = PlayerDirection.left;
+        player.horizontalMovement = -1;
         break;
       case JoystickDirection.right:
       case JoystickDirection.upRight:
       case JoystickDirection.downRight:
-        player.playerDirection = PlayerDirection.right;
+        player.horizontalMovement = 1;
         break;
-      case JoystickDirection.idle:
-        player.playerDirection = PlayerDirection.none;
+      default:
+        player.horizontalMovement = 0;
         break;
     }
   }
