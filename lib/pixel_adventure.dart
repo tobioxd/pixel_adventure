@@ -37,12 +37,6 @@ class PixelAdventure extends FlameGame
 
     _loadLevel();
 
-    if (showJoystick) {
-      addJoystick();
-      add(JumpButton());
-      add(DownButton());
-    }
-
     return super.onLoad();
   }
 
@@ -56,7 +50,7 @@ class PixelAdventure extends FlameGame
 
   void addJoystick() {
     joystick = JoystickComponent(
-      priority: 10,
+      priority: 1,
       knob: SpriteComponent(
         sprite: Sprite(
           images.fromCache('HUD/Knob.png'),
@@ -67,10 +61,10 @@ class PixelAdventure extends FlameGame
           images.fromCache('HUD/Joystick.png'),
         ),
       ),
-      margin: const EdgeInsets.only(left: 20, bottom: 45),
+      margin: const EdgeInsets.only(left: 40, bottom: 35),
     );
 
-    add(joystick);
+    cam.viewport.add(joystick);
   }
 
   void updateJoyStick() {
@@ -120,6 +114,14 @@ class PixelAdventure extends FlameGame
       cam.viewfinder.anchor = Anchor.topLeft;
 
       addAll([cam, world]);
+
+      if (showJoystick) {
+      addJoystick();
+      // add(JumpButton());
+      cam.viewport.add(JumpButton());
+      cam.viewport.add(DownButton());
+    }
+    
     } catch (e) {
       print('Error loading level: $e');
     }

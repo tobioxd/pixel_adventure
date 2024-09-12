@@ -9,14 +9,14 @@ class DownButton extends SpriteComponent
   DownButton();
 
   final margin = 32;
-  final buttonSize = 64;
+  final buttonSize = 32;
 
   @override
   FutureOr<void> onLoad() {
     sprite = Sprite(game.images.fromCache('HUD/DownButton.png'));
     position = Vector2(
-      game.size.x - margin - buttonSize,
-      game.size.y - margin - buttonSize + 20,
+      game.size.x - margin - buttonSize - 220,
+      game.size.y - margin - buttonSize - 60,
     );
     priority = 10;
     return super.onLoad();
