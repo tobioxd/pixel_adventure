@@ -7,9 +7,11 @@ import 'package:pixel_adventure/components/background_tile.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
 import 'package:pixel_adventure/components/fruit.dart';
 import 'package:pixel_adventure/components/player.dart';
+import 'package:pixel_adventure/components/saw.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
-class Level extends World with HasGameRef<PixelAdventure>, DragCallbacks, HasCollisionDetection {
+class Level extends World
+    with HasGameRef<PixelAdventure>, DragCallbacks, HasCollisionDetection {
   final String levelName;
   final Player player;
   Level({required this.levelName, required this.player});
@@ -65,7 +67,7 @@ class Level extends World with HasGameRef<PixelAdventure>, DragCallbacks, HasCol
       final backgroundColor =
           backgroundLayer.properties.getValue('BackgroundColor');
       for (double y = 0; y < game.size.y / numTilesY; y++) {
-        for(double x = 0; x < numTilesX; x++) {
+        for (double x = 0; x < numTilesX; x++) {
           final tile = BackgroundTile(
             color: backgroundColor,
             position: Vector2(x * tileSize, y * tileSize),
@@ -93,6 +95,19 @@ class Level extends World with HasGameRef<PixelAdventure>, DragCallbacks, HasCol
               size: Vector2(spawnPoint.width, spawnPoint.height),
             );
             add(fruit);
+            break;
+          case 'Saw':
+            final isVertical = spawnPoint.properties.getValue('isVertical');
+            final offNeg = spawnPoint.properties.getValue('offNeg');
+            final offPos = spawnPoint.properties.getValue('offPos');
+            final saw = Saw(
+              isVertical: isVertical,
+              offNeg: offNeg,
+              offPos: offPos,
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            add(saw);
             break;
           default:
         }
