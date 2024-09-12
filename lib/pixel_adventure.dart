@@ -1,9 +1,13 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:pixel_adventure/components/down_button.dart';
+import 'package:pixel_adventure/components/jump_button.dart';
 import 'package:pixel_adventure/components/player.dart';
 import 'package:pixel_adventure/components/level.dart';
 
@@ -18,7 +22,7 @@ class PixelAdventure extends FlameGame
   late CameraComponent cam;
   Player player = Player(character: 'Mask Dude');
   late JoystickComponent joystick;
-  bool showJoystick = false;
+  bool showJoystick = true;
   List<String> levelNames = [
     'Level-01',
     'Level-01',
@@ -34,7 +38,9 @@ class PixelAdventure extends FlameGame
     _loadLevel();
 
     if (showJoystick) {
-      addJoyStick();
+      addJoystick();
+      add(JumpButton());
+      add(DownButton());
     }
 
     return super.onLoad();
@@ -48,18 +54,22 @@ class PixelAdventure extends FlameGame
     super.update(dt);
   }
 
-  void addJoyStick() {
+  void addJoystick() {
     joystick = JoystickComponent(
+      priority: 10,
       knob: SpriteComponent(
-        sprite: Sprite(images.fromCache('HUD/Knob.png')),
-        size: Vector2.all(50),
+        sprite: Sprite(
+          images.fromCache('HUD/Knob.png'),
+        ),
       ),
       background: SpriteComponent(
-        sprite: Sprite(images.fromCache('HUD/Joystick.png')),
-        size: Vector2.all(100),
+        sprite: Sprite(
+          images.fromCache('HUD/Joystick.png'),
+        ),
       ),
-      margin: const EdgeInsets.only(left: 10, bottom: 10),
+      margin: const EdgeInsets.only(left: 20, bottom: 45),
     );
+
     add(joystick);
   }
 
