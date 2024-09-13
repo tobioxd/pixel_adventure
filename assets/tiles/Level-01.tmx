@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="64">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="65">
  <tileset firstgid="1" source="Pixel Adventure.tsx"/>
  <tileset firstgid="243" source="test.tsx"/>
  <layer id="1" name="Background" width="40" height="23">
@@ -26,9 +26,9 @@
 113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,41,41,42,7,8,9,29,30,31,111,
 113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,30,31,29,30,31,111,
 113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,30,31,29,30,31,111,
-113,7,8,8,8,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,8,8,8,8,9,29,30,31,29,30,31,111,
-113,29,30,30,30,30,31,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,30,30,30,30,31,29,30,31,29,30,31,111,
-113,51,52,52,52,52,53,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,51,52,52,52,52,53,51,52,53,51,52,53,111,
+113,7,8,8,8,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,9,29,30,31,29,30,31,111,
+113,29,30,30,30,30,31,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30,30,31,29,30,31,29,30,31,111,
+113,51,52,52,52,52,53,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,52,52,53,51,52,53,51,52,53,111,
 114,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,115
 </data>
  </layer>
@@ -53,7 +53,7 @@
    </properties>
   </object>
   <object id="36" type="Checkpoint" x="574.488" y="144.595" width="64" height="64"/>
-  <object id="37" name="Chicken" type="Chicken" x="287.2" y="320.205" width="32" height="32">
+  <object id="37" name="Chicken" type="Chicken" x="191.867" y="320.872" width="32" height="32">
    <properties>
     <property name="offNeg" type="float" value="12"/>
     <property name="offPos" type="float" value="5"/>
@@ -70,13 +70,6 @@
     <property name="offPos" type="float" value="3"/>
    </properties>
   </object>
-  <object id="50" type="Saw" x="224.667" y="320" width="32" height="32">
-   <properties>
-    <property name="isVertical" type="bool" value="false"/>
-    <property name="offNeg" type="float" value="4"/>
-    <property name="offPos" type="float" value="3"/>
-   </properties>
-  </object>
   <object id="51" type="Saw" x="527.333" y="176.667" width="32" height="32">
    <properties>
     <property name="isVertical" type="bool" value="true"/>
@@ -85,6 +78,12 @@
    </properties>
   </object>
   <object id="52" name="Kiwi" type="Fruit" x="369.334" y="157.964" width="32" height="32"/>
+  <object id="64" name="Chicken" type="Chicken" x="366.667" y="320.667" width="32" height="32">
+   <properties>
+    <property name="offNeg" type="float" value="12"/>
+    <property name="offPos" type="float" value="5"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="3" name="Collisions">
   <object id="7" x="0.389808" y="-0.800446" width="16" height="352.342"/>
@@ -95,7 +94,7 @@
   <object id="12" x="15.1996" y="304.205" width="96" height="48"/>
   <object id="13" x="158.673" y="127.916" width="64" height="16"/>
   <object id="14" x="295.72" y="96.4398" width="64" height="16"/>
-  <object id="15" x="430.81" y="304.205" width="96" height="48"/>
+  <object id="15" x="479.477" y="304.205" width="47.3333" height="48"/>
   <object id="16" type="Platform" x="462.81" y="257.396" width="64" height="16"/>
   <object id="17" type="Platform" x="417.333" y="144.739" width="64" height="16"/>
   <object id="18" type="Platform" x="64.7672" y="175.616" width="48" height="16"/>
