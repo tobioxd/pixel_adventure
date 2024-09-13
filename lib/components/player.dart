@@ -7,6 +7,7 @@ import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
 import 'package:pixel_adventure/components/custom_hitbox.dart';
 import 'package:pixel_adventure/components/fruit.dart';
+import 'package:pixel_adventure/components/globalstate.dart';
 import 'package:pixel_adventure/components/saw.dart';
 import 'package:pixel_adventure/components/utils.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
@@ -105,9 +106,15 @@ class Player extends SpriteAnimationGroupComponent
   void onCollisionStart(
       Set<Vector2> intersectionPoints, PositionComponent other) {
     if (!finish) {
-      if (other is Fruit) other.collidedWithPlayer();
+      if (other is Fruit) {
+        other.collidedWithPlayer();
+      }
       if (other is Saw) _response();
-      if (other is Checkpoint) _finish();
+      if (other is Checkpoint) {
+        if (GlobalState().numberFruits == 0) {
+          _finish();
+        }
+      }
     }
 
     super.onCollisionStart(intersectionPoints, other);
@@ -274,26 +281,29 @@ class Player extends SpriteAnimationGroupComponent
     });
   }
 
+  int areFruitsRemaining() {
+    return PixelAdventure.totalFruitCount(game);
+  }
+
   void _finish() {
-      finish = true;
-      if(scale.x > 0){
-        position = position - Vector2.all(32);
-      }else if(scale.x < 0){
-        position = position + Vector2(32, -32);
-      }
+    finish = true;
+    if (scale.x > 0) {
+      position = position - Vector2.all(32);
+    } else if (scale.x < 0) {
+      position = position + Vector2(32, -32);
+    }
 
-      current = PlayerState.disappearing;
+    current = PlayerState.disappearing;
 
-      const reachedCheckpointDuration = Duration(milliseconds : 200);
-      Future.delayed(reachedCheckpointDuration, (){
-          finish = false;
-          position = Vector2.all(-640);
+    const reachedCheckpointDuration = Duration(milliseconds: 200);
+    Future.delayed(reachedCheckpointDuration, () {
+      finish = false;
+      position = Vector2.all(-640);
 
-          const waitToChangeDuration = Duration(seconds: 2);
-          Future.delayed(waitToChangeDuration, (){
-              game.loadNextLevel();
-          });
+      const waitToChangeDuration = Duration(seconds: 2);
+      Future.delayed(waitToChangeDuration, () {
+        game.loadNextLevel();
       });
-
+    });
   }
 }

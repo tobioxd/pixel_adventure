@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:pixel_adventure/components/custom_hitbox.dart';
+import 'package:pixel_adventure/components/globalstate.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 class Fruit extends SpriteAnimationComponent
@@ -64,6 +65,12 @@ class Fruit extends SpriteAnimationComponent
 
       await animationTicker?.completed;
       removeFromParent();
+
+      GlobalState().numberFruits --;
+
+      print(GlobalState().numberFruits);
+      
     }
   }
+  
 }
