@@ -5,12 +5,14 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:pixel_adventure/components/down_button.dart';
 import 'package:pixel_adventure/components/fruit.dart';
 import 'package:pixel_adventure/components/jump_button.dart';
 import 'package:pixel_adventure/components/player.dart';
 import 'package:pixel_adventure/components/level.dart';
+import 'package:pixel_adventure/components/sound_button.dart';
 
 class PixelAdventure extends FlameGame
     with
@@ -23,8 +25,10 @@ class PixelAdventure extends FlameGame
   late CameraComponent cam;
   Player player = Player(character: 'Mask Dude');
   late JoystickComponent joystick;
-  bool showControls = false;
+  late SoundButton soundButton;
+  bool showControls = true;
   bool playSounds = true;
+  bool playSoundsBackground = true;
   double soundVolume = 0.75;
   List<String> levelNames = [
     'Level-01',
@@ -40,6 +44,8 @@ class PixelAdventure extends FlameGame
 
     _loadLevel();
 
+    await _initBackgroundMusic();
+
     return super.onLoad();
   }
 
@@ -49,6 +55,12 @@ class PixelAdventure extends FlameGame
       updateJoyStick();
     }
     super.update(dt);
+  }
+
+  @override
+  void onDetach() {
+    FlameAudio.bgm.stop();
+    super.onDetach();
   }
 
   void addJoystick() {
@@ -119,12 +131,13 @@ class PixelAdventure extends FlameGame
       addAll([cam, world]);
 
       if (showControls) {
-      addJoystick();
-      // add(JumpButton());
-      cam.viewport.add(JumpButton());
-      cam.viewport.add(DownButton());
-    }
-    
+        addJoystick();
+        // add(JumpButton());
+        cam.viewport.add(JumpButton());
+        cam.viewport.add(DownButton());
+      }
+      soundButton = SoundButton();
+      cam.viewport.add(soundButton);
     } catch (e) {
       print('Error loading level: $e');
     }
@@ -135,4 +148,25 @@ class PixelAdventure extends FlameGame
     return fruits.length;
   }
 
+  Future<void> _initBackgroundMusic() async {
+    await FlameAudio.audioCache.load('backgroundsound1.mp3');
+
+    FlameAudio.bgm.stop();
+
+    if (playSoundsBackground) {
+      await FlameAudio.bgm.play('backgroundsound1.mp3');
+    }
+  }
+
+  void toggleBackgroundMusic() {
+    playSoundsBackground = !playSoundsBackground;
+
+    if (playSoundsBackground) {
+      FlameAudio.bgm.play('backgroundsound1.mp3');
+    } else {
+      FlameAudio.bgm.stop();
+    }
+
+    soundButton.updateSprite();
+  }
 }

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:pixel_adventure/components/background_tile.dart';
 import 'package:pixel_adventure/components/checkpoint.dart';
@@ -33,7 +32,6 @@ class Level extends World
     _scrollingBackground();
     _spawningObjects();
     _addCollisions();
-    _playAlternatingBackgroundMusic();
 
     return super.onLoad();
   }
@@ -133,23 +131,4 @@ class Level extends World
     player.collisionBlocks = collisionBlocks;
   }
 
-  void _playAlternatingBackgroundMusic() {
-    final List<String> backgroundSounds = [
-      'backgroundsound1.mp3',
-      'backgroundsound2.mp3',
-    ];
-
-    void playNextSound(int index) {
-      FlameAudio.bgm.play(backgroundSounds[index]);
-
-      // ignore: prefer_const_constructors
-      Future.delayed(Duration(minutes: 2), () {
-        FlameAudio.bgm.stop();
-        playNextSound((index + 1) % backgroundSounds.length);
-      });
-    }
-
-    // Bắt đầu phát nhạc từ file đầu tiên
-    playNextSound(0);
-  }
 }
