@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:pixel_adventure/components/background_tile.dart';
 import 'package:pixel_adventure/components/checkpoint.dart';
@@ -22,6 +23,9 @@ class Level extends World
 
   @override
   FutureOr<void> onLoad() async {
+    // Reset numberFruits to 0 when a new map is loaded
+    GlobalState().numberFruits = 0;
+
     level = await TiledComponent.load('$levelName.tmx', Vector2.all(16));
 
     add(level);
@@ -29,6 +33,7 @@ class Level extends World
     _scrollingBackground();
     _spawningObjects();
     _addCollisions();
+    _playAlternatingBackgroundMusic();
 
     return super.onLoad();
   }
@@ -72,7 +77,7 @@ class Level extends World
               size: Vector2(spawnPoint.width, spawnPoint.height),
             );
             add(fruit);
-            GlobalState().numberFruits ++;
+            GlobalState().numberFruits++;
             break;
           case 'Saw':
             final isVertical = spawnPoint.properties.getValue('isVertical');
@@ -87,7 +92,7 @@ class Level extends World
             );
             add(saw);
             break;
-            case 'Checkpoint':
+          case 'Checkpoint':
             final checkpoint = Checkpoint(
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
@@ -128,4 +133,23 @@ class Level extends World
     player.collisionBlocks = collisionBlocks;
   }
 
+  void _playAlternatingBackgroundMusic() {
+    final List<String> backgroundSounds = [
+      'backgroundsound1.mp3',
+      'backgroundsound2.mp3',
+    ];
+
+    void playNextSound(int index) {
+      FlameAudio.bgm.play(backgroundSounds[index]);
+
+      // ignore: prefer_const_constructors
+      Future.delayed(Duration(minutes: 2), () {
+        FlameAudio.bgm.stop();
+        playNextSound((index + 1) % backgroundSounds.length);
+      });
+    }
+
+    // Bắt đầu phát nhạc từ file đầu tiên
+    playNextSound(0);
+  }
 }

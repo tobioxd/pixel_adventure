@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
 import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
@@ -198,6 +199,9 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   void _playerJump(double dt) {
+
+    if(game.playSounds) FlameAudio.play('jump.wav', volume : game.soundVolume / 2);
+
     velocity.y = -_jumpForce;
     position.y += velocity.y * dt;
     isOnGround = false;
@@ -263,8 +267,11 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   void _response() {
-    const hitDuration = Duration(milliseconds: 200);
-    const appearingDuration = Duration(milliseconds: 200);
+
+    if (game.playSounds) FlameAudio.play('hit.wav', volume: game.soundVolume);
+
+    const hitDuration = Duration(seconds: 1);
+    const appearingDuration = Duration(milliseconds: 400);
     const canMoveDuration = Duration(milliseconds: 200);
     gotHit = true;
     current = PlayerState.hit;
@@ -272,6 +279,7 @@ class Player extends SpriteAnimationGroupComponent
       scale.x = 1;
       position = startingPosition - Vector2.all(32);
       current = PlayerState.appearing;
+      if (game.playSounds) FlameAudio.play('sponse.wav', volume: game.soundVolume);
       Future.delayed(appearingDuration, () {
         velocity = Vector2.zero();
         position = startingPosition;
@@ -294,6 +302,9 @@ class Player extends SpriteAnimationGroupComponent
     }
 
     current = PlayerState.disappearing;
+    if (game.playSounds) {
+        FlameAudio.play('disappear.wav', volume: game.soundVolume);
+      }
 
     const reachedCheckpointDuration = Duration(milliseconds: 200);
     Future.delayed(reachedCheckpointDuration, () {

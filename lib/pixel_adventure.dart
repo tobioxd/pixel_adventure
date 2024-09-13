@@ -23,7 +23,9 @@ class PixelAdventure extends FlameGame
   late CameraComponent cam;
   Player player = Player(character: 'Mask Dude');
   late JoystickComponent joystick;
-  bool showJoystick = false;
+  bool showControls = false;
+  bool playSounds = true;
+  double soundVolume = 0.75;
   List<String> levelNames = [
     'Level-01',
     'Level-01',
@@ -43,7 +45,7 @@ class PixelAdventure extends FlameGame
 
   @override
   void update(dt) {
-    if (showJoystick) {
+    if (showControls) {
       updateJoyStick();
     }
     super.update(dt);
@@ -116,7 +118,7 @@ class PixelAdventure extends FlameGame
 
       addAll([cam, world]);
 
-      if (showJoystick) {
+      if (showControls) {
       addJoystick();
       // add(JumpButton());
       cam.viewport.add(JumpButton());
