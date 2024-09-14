@@ -87,22 +87,22 @@ class Player extends SpriteAnimationGroupComponent
     super.update(dt);
   }
 
-  @override
-  bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    horizontalMovement = 0;
-    final isLeftKeyPressed = keysPressed.contains(LogicalKeyboardKey.arrowLeft);
-    final isRightKeyPressed =
-        keysPressed.contains(LogicalKeyboardKey.arrowRight);
+  // @override
+  // bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+  //   horizontalMovement = 0;
+  //   final isLeftKeyPressed = keysPressed.contains(LogicalKeyboardKey.arrowLeft);
+  //   final isRightKeyPressed =
+  //       keysPressed.contains(LogicalKeyboardKey.arrowRight);
 
-    horizontalMovement += isLeftKeyPressed ? -1 : 0;
-    horizontalMovement += isRightKeyPressed ? 1 : 0;
+  //   horizontalMovement += isLeftKeyPressed ? -1 : 0;
+  //   horizontalMovement += isRightKeyPressed ? 1 : 0;
 
-    hasJumped = keysPressed.contains(LogicalKeyboardKey.arrowUp);
+  //   hasJumped = keysPressed.contains(LogicalKeyboardKey.arrowUp);
 
-    isFastFalling = keysPressed.contains(LogicalKeyboardKey.arrowDown);
+  //   isFastFalling = keysPressed.contains(LogicalKeyboardKey.arrowDown);
 
-    return super.onKeyEvent(event, keysPressed);
-  }
+  //   return super.onKeyEvent(event, keysPressed);
+  // }
 
   @override
   void onCollisionStart(
@@ -189,7 +189,7 @@ class Player extends SpriteAnimationGroupComponent
 
     // Checks if jumping, set to jumping
     if (velocity.y < 0) playerState = PlayerState.jumping;
-
+  
     current = playerState;
   }
 

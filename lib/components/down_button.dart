@@ -8,6 +8,8 @@ class DownButton extends SpriteComponent
     with HasGameRef<PixelAdventure>, TapCallbacks {
   DownButton();
 
+  final wid = 640;
+  final hei = 360;
   final margin = 32;
   final buttonSize = 32;
 
@@ -15,8 +17,8 @@ class DownButton extends SpriteComponent
   FutureOr<void> onLoad() {
     sprite = Sprite(game.images.fromCache('HUD/DownButton.png'));
     position = Vector2(
-      game.size.x - margin - buttonSize - 220,
-      game.size.y - margin - buttonSize - 60,
+      wid - margin - buttonSize - 20,
+      hei - margin - buttonSize - 20,
     );
     priority = 10;
     return super.onLoad();

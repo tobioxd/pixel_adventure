@@ -116,6 +116,8 @@ class PixelAdventure extends FlameGame
 
   void _loadLevel() {
     try {
+      // ignore: unnecessary_new
+      player = new Player(character: 'Mask Dude');
       Level world = Level(
         player: player,
         levelName: levelNames[currentLevel],
