@@ -7,6 +7,7 @@ import 'package:pixel_adventure/components/background_tile.dart';
 import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/chicken.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
+import 'package:pixel_adventure/components/fire.dart';
 import 'package:pixel_adventure/components/fruit.dart';
 import 'package:pixel_adventure/components/globalstate.dart';
 import 'package:pixel_adventure/components/player.dart';
@@ -108,6 +109,12 @@ class Level extends World
               offPos: offPos,
             );
             add(chicken);
+            break;
+          case 'Fire':
+            final fire = Fire(
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+            );
+            add(fire);
             break;
           default:
         }

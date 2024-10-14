@@ -8,6 +8,7 @@ import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/chicken.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
 import 'package:pixel_adventure/components/custom_hitbox.dart';
+import 'package:pixel_adventure/components/fire.dart';
 import 'package:pixel_adventure/components/fruit.dart';
 import 'package:pixel_adventure/components/globalstate.dart';
 import 'package:pixel_adventure/components/saw.dart';
@@ -120,6 +121,9 @@ class Player extends SpriteAnimationGroupComponent
           _finish();
         }
       }
+      if (other is Fire) {
+      _response();
+    }
     }
 
     super.onCollisionStart(intersectionPoints, other);
