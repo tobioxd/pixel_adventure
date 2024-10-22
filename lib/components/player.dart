@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
-import 'package:flutter/services.dart';
 import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/chicken.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
@@ -122,8 +121,8 @@ class Player extends SpriteAnimationGroupComponent
         }
       }
       if (other is Fire) {
-      _response();
-    }
+        _response();
+      }
     }
 
     super.onCollisionStart(intersectionPoints, other);
@@ -193,7 +192,7 @@ class Player extends SpriteAnimationGroupComponent
 
     // Checks if jumping, set to jumping
     if (velocity.y < 0) playerState = PlayerState.jumping;
-  
+
     current = playerState;
   }
 
@@ -207,8 +206,9 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   void _playerJump(double dt) {
-
-    if(game.playSounds) FlameAudio.play('jump.wav', volume : game.soundVolume / 2);
+    if (game.playSounds) {
+      FlameAudio.play('jump.wav', volume: game.soundVolume / 2);
+    }
 
     velocity.y = -_jumpForce;
     position.y += velocity.y * dt;
@@ -219,7 +219,7 @@ class Player extends SpriteAnimationGroupComponent
   void _checkHorizontalCollisions() {
     for (final block in collisionBlocks) {
       if (!block.isPlatform) {
-        if (checkCollision(this, block)) {
+        if (GameUtils.checkCollision(this, block)) {
           if (velocity.x > 0) {
             velocity.x = 0;
             position.x = block.x - hitbox.offsetX - hitbox.width;
@@ -249,7 +249,7 @@ class Player extends SpriteAnimationGroupComponent
   void _checkVerticalCollisions() {
     for (final block in collisionBlocks) {
       if (block.isPlatform) {
-        if (checkCollision(this, block)) {
+        if (GameUtils.checkCollision(this, block)) {
           if (velocity.y > 0) {
             velocity.y = 0;
             position.y = block.y - hitbox.height - hitbox.offsetY;
@@ -258,7 +258,7 @@ class Player extends SpriteAnimationGroupComponent
           }
         }
       } else {
-        if (checkCollision(this, block)) {
+        if (GameUtils.checkCollision(this, block)) {
           if (velocity.y > 0) {
             velocity.y = 0;
             position.y = block.y - hitbox.height - hitbox.offsetY;
@@ -275,7 +275,6 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   void _response() {
-
     if (game.playSounds) FlameAudio.play('hit.wav', volume: game.soundVolume);
 
     const hitDuration = Duration(seconds: 1);
@@ -287,7 +286,9 @@ class Player extends SpriteAnimationGroupComponent
       scale.x = 1;
       position = startingPosition - Vector2.all(32);
       current = PlayerState.appearing;
-      if (game.playSounds) FlameAudio.play('sponse.wav', volume: game.soundVolume);
+      if (game.playSounds) {
+        FlameAudio.play('sponse.wav', volume: game.soundVolume);
+      }
       Future.delayed(appearingDuration, () {
         velocity = Vector2.zero();
         position = startingPosition;
@@ -311,8 +312,8 @@ class Player extends SpriteAnimationGroupComponent
 
     current = PlayerState.disappearing;
     if (game.playSounds) {
-        FlameAudio.play('disappear.wav', volume: game.soundVolume);
-      }
+      FlameAudio.play('disappear.wav', volume: game.soundVolume);
+    }
 
     const reachedCheckpointDuration = Duration(milliseconds: 200);
     Future.delayed(reachedCheckpointDuration, () {
