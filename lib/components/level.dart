@@ -12,6 +12,9 @@ import 'package:pixel_adventure/components/fruit.dart';
 import 'package:pixel_adventure/components/globalstate.dart';
 import 'package:pixel_adventure/components/player.dart';
 import 'package:pixel_adventure/components/saw.dart';
+import 'package:pixel_adventure/components/saw1.dart';
+import 'package:pixel_adventure/components/saw2.dart';
+import 'package:pixel_adventure/components/saw3.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 class Level extends World
@@ -92,6 +95,47 @@ class Level extends World
             );
             add(saw);
             break;
+          case 'Saw1':
+            final isVertical = spawnPoint.properties.getValue('isVertical');
+            final offNeg = spawnPoint.properties.getValue('offNeg');
+            final offPos = spawnPoint.properties.getValue('offPos');
+            final saw = Saw1(
+              isVertical: isVertical,
+              offNeg: offNeg,
+              offPos: offPos,
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            add(saw);
+            break;
+          case 'Saw2':
+            final offNeg = spawnPoint.properties.getValue('offNeg') ?? 0.0;
+            final offPos = spawnPoint.properties.getValue('offPos') ?? 0.0;
+            final verticalOffset =
+                spawnPoint.properties.getValue('verticalOffset') ?? 2.0;
+            final saw = Saw2(
+              offNeg: offNeg,
+              offPos: offPos,
+              verticalOffset: verticalOffset,
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            add(saw);
+            break;
+          case 'Saw3':
+            final offNeg = spawnPoint.properties.getValue('offNeg') ?? 0.0;
+            final offPos = spawnPoint.properties.getValue('offPos') ?? 0.0;
+            final verticalOffset =
+                spawnPoint.properties.getValue('verticalOffset') ?? 2.0;
+            final saw = Saw3(
+              offNeg: offNeg,
+              offPos: offPos,
+              verticalOffset: verticalOffset,
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            add(saw);
+            break;
           case 'Checkpoint':
             final checkpoint = Checkpoint(
               position: Vector2(spawnPoint.x, spawnPoint.y),
@@ -149,5 +193,4 @@ class Level extends World
     }
     player.collisionBlocks = collisionBlocks;
   }
-
 }

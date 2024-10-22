@@ -12,6 +12,9 @@ import 'package:pixel_adventure/components/fire.dart';
 import 'package:pixel_adventure/components/fruit.dart';
 import 'package:pixel_adventure/components/globalstate.dart';
 import 'package:pixel_adventure/components/saw.dart';
+import 'package:pixel_adventure/components/saw1.dart';
+import 'package:pixel_adventure/components/saw2.dart';
+import 'package:pixel_adventure/components/saw3.dart';
 import 'package:pixel_adventure/components/utils.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
@@ -113,6 +116,9 @@ class Player extends SpriteAnimationGroupComponent
         other.collidedWithPlayer();
       }
       if (other is Saw) _response();
+      if (other is Saw1) _response();
+      if (other is Saw2) _response();
+      if (other is Saw3) _response();
       if (other is Chicken) {
         other.collidedWithPlayer();
       }

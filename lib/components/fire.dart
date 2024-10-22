@@ -52,7 +52,7 @@ class Fire extends SpriteAnimationComponent with HasGameRef<PixelAdventure>, Col
         SpriteAnimationData.sequenced(
           amount: 1,
           stepTime: stepTime,
-          textureSize: Vector2.all(38),
+          textureSize: Vector2(16,32),
           loop: false,
         ),
       );
