@@ -3,19 +3,19 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
-import 'package:pixel_adventure/components/checkpoint.dart';
-import 'package:pixel_adventure/components/chicken.dart';
-import 'package:pixel_adventure/components/collision_block.dart';
-import 'package:pixel_adventure/components/custom_hitbox.dart';
-import 'package:pixel_adventure/components/fire.dart';
-import 'package:pixel_adventure/components/fruit.dart';
-import 'package:pixel_adventure/components/globalstate.dart';
-import 'package:pixel_adventure/components/saw.dart';
-import 'package:pixel_adventure/components/saw1.dart';
-import 'package:pixel_adventure/components/saw2.dart';
-import 'package:pixel_adventure/components/saw3.dart';
-import 'package:pixel_adventure/components/utils.dart';
-import 'package:pixel_adventure/pixel_adventure.dart';
+import 'package:pixel_adventure/core/utils/check_collision.dart';
+import 'package:pixel_adventure/game/components/checkpoint.dart';
+import 'package:pixel_adventure/game/enemies/chicken.dart';
+import 'package:pixel_adventure/game/components/collision_block.dart';
+import 'package:pixel_adventure/core/utils/custom_hitbox.dart';
+import 'package:pixel_adventure/game/obstacles/fire.dart';
+import 'package:pixel_adventure/game/items/fruit.dart';
+import 'package:pixel_adventure/game/states/globalstate.dart';
+import 'package:pixel_adventure/game/obstacles/saw.dart';
+import 'package:pixel_adventure/game/obstacles/saw1.dart';
+import 'package:pixel_adventure/game/obstacles/saw2.dart';
+import 'package:pixel_adventure/game/obstacles/saw3.dart';
+import 'package:pixel_adventure/game/screens/pixel_adventure.dart';
 
 enum PlayerState {
   idle,
@@ -225,7 +225,7 @@ class Player extends SpriteAnimationGroupComponent
   void _checkHorizontalCollisions() {
     for (final block in collisionBlocks) {
       if (!block.isPlatform) {
-        if (GameUtils.checkCollision(this, block)) {
+        if (CheckCollision.call(this, block)) {
           if (velocity.x > 0) {
             velocity.x = 0;
             position.x = block.x - hitbox.offsetX - hitbox.width;
@@ -255,7 +255,7 @@ class Player extends SpriteAnimationGroupComponent
   void _checkVerticalCollisions() {
     for (final block in collisionBlocks) {
       if (block.isPlatform) {
-        if (GameUtils.checkCollision(this, block)) {
+        if (CheckCollision.call(this, block)) {
           if (velocity.y > 0) {
             velocity.y = 0;
             position.y = block.y - hitbox.height - hitbox.offsetY;
@@ -264,7 +264,7 @@ class Player extends SpriteAnimationGroupComponent
           }
         }
       } else {
-        if (GameUtils.checkCollision(this, block)) {
+        if (CheckCollision.call(this, block)) {
           if (velocity.y > 0) {
             velocity.y = 0;
             position.y = block.y - hitbox.height - hitbox.offsetY;

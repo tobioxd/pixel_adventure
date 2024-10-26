@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:pixel_adventure/pixel_adventure.dart';
+import 'package:pixel_adventure/game/screens/pixel_adventure.dart';
 
-class Saw3 extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
+class Saw2 extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
   final double offNeg;
   final double offPos;
-  final double verticalOffset;
-  Saw3({
+  final double verticalOffset; // Thêm biến để giống với Saw3
+  Saw2({
     this.offNeg = 0,
     this.offPos = 0,
-    this.verticalOffset = 2,
+    this.verticalOffset = 2, // Đặt giá trị mặc định giống Saw3
     position,
     size,
   }) : super(
@@ -21,12 +21,11 @@ class Saw3 extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
   static const double sawSpeed = 0.03;
   static const moveSpeed = 50;
   static const tileSize = 16;
-  double moveDirection = 1;
+  int movePhase = 0; // 0: right, 1: down, 2: left, 3: up
   double rangeLeft = 0;
   double rangeRight = 0;
   double rangeTop = 0;
   double rangeBottom = 0;
-  int currentPhase = 0; // 0: left, 1: up, 2: right, 3: down
 
   @override
   FutureOr<void> onLoad() {
@@ -35,8 +34,8 @@ class Saw3 extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
 
     rangeLeft = position.x - offNeg * tileSize;
     rangeRight = position.x + offPos * tileSize;
-    rangeTop = position.y - verticalOffset * 1.5 * tileSize;
-    rangeBottom = position.y;
+    rangeTop = position.y;
+    rangeBottom = position.y + verticalOffset * 1.5 * tileSize;
 
     animation = SpriteAnimation.fromFrameData(
         game.images.fromCache('Traps/Saw/On (38x38).png'),
@@ -55,33 +54,33 @@ class Saw3 extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
   }
 
   void _moveRectangular(double dt) {
-    switch (currentPhase) {
-      case 0: // Moving left
-        position.x -= moveSpeed * dt;
-        if (position.x <= rangeLeft) {
-          position.x = rangeLeft;
-          currentPhase = 1;
-        }
-        break;
-      case 1: // Moving up
-        position.y -= moveSpeed * dt;
-        if (position.y <= rangeTop) {
-          position.y = rangeTop;
-          currentPhase = 2;
-        }
-        break;
-      case 2: // Moving right
+    switch (movePhase) {
+      case 0: // Move right
         position.x += moveSpeed * dt;
         if (position.x >= rangeRight) {
           position.x = rangeRight;
-          currentPhase = 3;
+          movePhase = 1;
         }
         break;
-      case 3: // Moving down
+      case 1: // Move down
         position.y += moveSpeed * dt;
         if (position.y >= rangeBottom) {
           position.y = rangeBottom;
-          currentPhase = 0;
+          movePhase = 2;
+        }
+        break;
+      case 2: // Move left
+        position.x -= moveSpeed * dt;
+        if (position.x <= rangeLeft) {
+          position.x = rangeLeft;
+          movePhase = 3;
+        }
+        break;
+      case 3: // Move up
+        position.y -= moveSpeed * dt;
+        if (position.y <= rangeTop) {
+          position.y = rangeTop;
+          movePhase = 0;
         }
         break;
     }

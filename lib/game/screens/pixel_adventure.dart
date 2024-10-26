@@ -7,12 +7,12 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
-import 'package:pixel_adventure/components/down_button.dart';
-import 'package:pixel_adventure/components/fruit.dart';
-import 'package:pixel_adventure/components/jump_button.dart';
-import 'package:pixel_adventure/components/player.dart';
-import 'package:pixel_adventure/components/level.dart';
-import 'package:pixel_adventure/components/sound_button.dart';
+import 'package:pixel_adventure/game/controls/down_button.dart';
+import 'package:pixel_adventure/game/items/fruit.dart';
+import 'package:pixel_adventure/game/controls/jump_button.dart';
+import 'package:pixel_adventure/game/players/player.dart';
+import 'package:pixel_adventure/game/levels/level.dart';
+import 'package:pixel_adventure/game/controls/sound_button.dart';
 
 class PixelAdventure extends FlameGame
     with
