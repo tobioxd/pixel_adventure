@@ -20,6 +20,8 @@ class PixelAdventure extends FlameGame
         DragCallbacks,
         HasCollisionDetection,
         TapCallbacks {
+  PixelAdventure({required this.playSoundsBackground});
+
   @override
   Color backgroundColor() => const Color(0xFF211F30);
   late CameraComponent cam;
@@ -28,7 +30,7 @@ class PixelAdventure extends FlameGame
   late SoundButton soundButton;
   bool showControls = true;
   bool playSounds = true;
-  bool playSoundsBackground = true;
+  bool playSoundsBackground;
   double soundVolume = 0.75;
   List<String> levelNames = [
     'Level-01',
@@ -101,8 +103,13 @@ class PixelAdventure extends FlameGame
   }
 
   void loadNextLevel() {
-    removeWhere(
-        (component) => component is Level || component is CameraComponent);
+    removeWhere((component) {
+      if (component is Level) {
+        component.onRemove();
+      }
+
+      return component is Level || component is CameraComponent;
+    });
 
     if (currentLevel < levelNames.length - 1) {
       currentLevel++;
