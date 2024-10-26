@@ -289,18 +289,24 @@ class Player extends SpriteAnimationGroupComponent
     gotHit = true;
     current = PlayerState.hit;
     Future.delayed(hitDuration, () {
-      scale.x = 1;
-      position = startingPosition - Vector2.all(32);
-      current = PlayerState.appearing;
-      if (game.playSounds) {
-        FlameAudio.play('sponse.wav', volume: game.soundVolume);
+      if (GlobalState().life > 1) {
+        GlobalState().life--;
+        scale.x = 1;
+        position = startingPosition - Vector2.all(32);
+        current = PlayerState.appearing;
+        if (game.playSounds) {
+          FlameAudio.play('sponse.wav', volume: game.soundVolume);
+        }
+        Future.delayed(appearingDuration, () {
+          velocity = Vector2.zero();
+          position = startingPosition;
+          _updatePlayerState();
+          Future.delayed(canMoveDuration, () => gotHit = false);
+        });
+        
+      } else {
+        game.loadFromNew();
       }
-      Future.delayed(appearingDuration, () {
-        velocity = Vector2.zero();
-        position = startingPosition;
-        _updatePlayerState();
-        Future.delayed(canMoveDuration, () => gotHit = false);
-      });
     });
   }
 

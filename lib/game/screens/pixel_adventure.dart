@@ -8,11 +8,13 @@ import 'package:flame/game.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:pixel_adventure/game/controls/down_button.dart';
+import 'package:pixel_adventure/game/controls/life.dart';
 import 'package:pixel_adventure/game/items/fruit.dart';
 import 'package:pixel_adventure/game/controls/jump_button.dart';
 import 'package:pixel_adventure/game/players/player.dart';
 import 'package:pixel_adventure/game/levels/level.dart';
 import 'package:pixel_adventure/game/controls/sound_button.dart';
+import 'package:pixel_adventure/game/states/globalstate.dart';
 
 class PixelAdventure extends FlameGame
     with
@@ -121,6 +123,20 @@ class PixelAdventure extends FlameGame
     _loadLevel();
   }
 
+  void loadFromNew(){
+    removeWhere((component) {
+      if (component is Level) {
+        component.onRemove();
+      }
+
+      return component is Level || component is CameraComponent;
+    });
+
+    currentLevel = 0;
+    
+    _loadLevel();
+  }
+
   void _loadLevel() {
     try {
       // ignore: unnecessary_new
@@ -147,6 +163,10 @@ class PixelAdventure extends FlameGame
       }
       soundButton = SoundButton();
       cam.viewport.add(soundButton);
+
+      GlobalState().life = 3;
+      cam.viewport.add(Life());
+      
     } catch (e) {
       print('Error loading level: $e');
     }

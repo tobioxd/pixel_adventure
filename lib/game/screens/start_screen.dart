@@ -13,7 +13,7 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-  late bool playSoundsBackground;
+  bool playSoundsBackground = true;
 
   @override
   Widget build(BuildContext context) {
