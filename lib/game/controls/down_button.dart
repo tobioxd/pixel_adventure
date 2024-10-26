@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:pixel_adventure/pixel_adventure.dart';
+import 'package:pixel_adventure/game/screens/pixel_adventure.dart';
 
-class JumpButton extends SpriteComponent
+class DownButton extends SpriteComponent
     with HasGameRef<PixelAdventure>, TapCallbacks {
-  JumpButton();
+  DownButton();
 
   final wid = 640;
   final hei = 360;
@@ -15,10 +15,10 @@ class JumpButton extends SpriteComponent
 
   @override
   FutureOr<void> onLoad() {
-    sprite = Sprite(game.images.fromCache('HUD/JumpButton.png'));
+    sprite = Sprite(game.images.fromCache('HUD/DownButton.png'));
     position = Vector2(
       wid - margin - buttonSize - 20,
-      hei - margin - buttonSize - 100,
+      hei - margin - buttonSize - 20,
     );
     priority = 10;
     return super.onLoad();
@@ -26,13 +26,13 @@ class JumpButton extends SpriteComponent
 
   @override
   void onTapDown(TapDownEvent event) {
-    game.player.hasJumped = true;
+    game.player.isFastFalling = true;
     super.onTapDown(event);
   }
 
   @override
   void onTapUp(TapUpEvent event) {
-    game.player.hasJumped = false;
+    game.player.isFastFalling = false;
     super.onTapUp(event);
   }
 }

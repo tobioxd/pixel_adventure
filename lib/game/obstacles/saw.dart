@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:pixel_adventure/pixel_adventure.dart';
+import 'package:pixel_adventure/game/screens/pixel_adventure.dart';
 
-class Saw1 extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
+class Saw extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
   final bool isVertical;
   final double offNeg;
   final double offPos;
-  Saw1({
+  Saw({
     this.isVertical = false,
     this.offNeg = 0,
     this.offPos = 0,
@@ -22,7 +22,7 @@ class Saw1 extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
   static const double sawSpeed = 0.03;
   static const moveSpeed = 50;
   static const tileSize = 16;
-  double moveDirection = -1; // Inverted initial direction
+  double moveDirection = 1;
   double rangeNeg = 0;
   double rangePos = 0;
 
@@ -60,19 +60,19 @@ class Saw1 extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
   }
 
   void _moveVertically(double dt) {
-    if (position.y <= rangeNeg) { // Inverted logic
-      moveDirection = 1;
-    } else if (position.y >= rangePos) { // Inverted logic
+    if (position.y >= rangePos) {
       moveDirection = -1;
+    } else if (position.y <= rangeNeg) {
+      moveDirection = 1;
     }
     position.y += moveDirection * moveSpeed * dt;
   }
 
   void _moveHorizontally(double dt) {
-    if (position.x <= rangeNeg) { // Inverted logic
-      moveDirection = 1;
-    } else if (position.x >= rangePos) { // Inverted logic
+    if (position.x >= rangePos) {
       moveDirection = -1;
+    } else if (position.x <= rangeNeg) {
+      moveDirection = 1;
     }
     position.x += moveDirection * moveSpeed * dt;
   }

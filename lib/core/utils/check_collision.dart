@@ -1,5 +1,5 @@
-class GameUtils {
-  static bool checkCollision(player, block) {
+class CheckCollision {
+  static bool call(player, block) {
     final hitbox = player.hitbox;
     final playerX = player.position.x + hitbox.offsetX;
     final playerY = player.position.y + hitbox.offsetY;

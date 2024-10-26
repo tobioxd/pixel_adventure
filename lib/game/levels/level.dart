@@ -3,19 +3,19 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:pixel_adventure/components/background_tile.dart';
-import 'package:pixel_adventure/components/checkpoint.dart';
-import 'package:pixel_adventure/components/chicken.dart';
-import 'package:pixel_adventure/components/collision_block.dart';
-import 'package:pixel_adventure/components/fire.dart';
-import 'package:pixel_adventure/components/fruit.dart';
-import 'package:pixel_adventure/components/globalstate.dart';
-import 'package:pixel_adventure/components/player.dart';
-import 'package:pixel_adventure/components/saw.dart';
-import 'package:pixel_adventure/components/saw1.dart';
-import 'package:pixel_adventure/components/saw2.dart';
-import 'package:pixel_adventure/components/saw3.dart';
-import 'package:pixel_adventure/pixel_adventure.dart';
+import 'package:pixel_adventure/game/uis/background_tile.dart';
+import 'package:pixel_adventure/game/components/checkpoint.dart';
+import 'package:pixel_adventure/game/enemies/chicken.dart';
+import 'package:pixel_adventure/game/components/collision_block.dart';
+import 'package:pixel_adventure/game/obstacles/fire.dart';
+import 'package:pixel_adventure/game/items/fruit.dart';
+import 'package:pixel_adventure/game/states/globalstate.dart';
+import 'package:pixel_adventure/game/players/player.dart';
+import 'package:pixel_adventure/game/obstacles/saw.dart';
+import 'package:pixel_adventure/game/obstacles/saw1.dart';
+import 'package:pixel_adventure/game/obstacles/saw2.dart';
+import 'package:pixel_adventure/game/obstacles/saw3.dart';
+import 'package:pixel_adventure/game/screens/pixel_adventure.dart';
 
 class Level extends World
     with HasGameRef<PixelAdventure>, DragCallbacks, HasCollisionDetection {
