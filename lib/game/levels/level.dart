@@ -26,6 +26,13 @@ class Level extends World
   List<CollisionBlock> collisionBlocks = [];
 
   @override
+  void onRemove() {
+    collisionBlocks.clear();
+    level.removeFromParent();
+    super.onRemove();
+  }
+
+  @override
   FutureOr<void> onLoad() async {
     // Reset numberFruits to 0 when a new map is loaded
     GlobalState().numberFruits = 0;
