@@ -154,7 +154,7 @@ class Rhino extends SpriteAnimationGroupComponent
 
   void _calculateRange() {
     // Điều chỉnh khoảng cách di chuyển
-    rangeNeg = position.x - offNeg * tileSize * 0.75;
+    rangeNeg = position.x - offNeg * tileSize * 0.7;
     rangePos = position.x + offPos * tileSize * 2.5;
   }
 

@@ -8,5 +8,13 @@ class GlobalState {
     return _instance;
   }
 
+  void resetLife(){
+    life = 3;
+  }
+
+  void minusLife(){
+    life--;
+  }
+
   GlobalState._internal();
 }

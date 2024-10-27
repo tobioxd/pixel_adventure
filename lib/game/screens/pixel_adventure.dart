@@ -38,9 +38,10 @@ class PixelAdventure extends FlameGame
   bool playSoundsBackground;
   double soundVolume = 0.75;
   List<String> levelNames = [
-    'Level-04',
+    'Level-01',
     'Level-02',
     'Level-03',
+    'Level-04',
   ];
   int currentLevel = 0;
 
@@ -168,7 +169,7 @@ class PixelAdventure extends FlameGame
       cam.viewport.add(soundButton);
 
       if (currentLevel == 0) {
-        GlobalState().life = 3;
+        GlobalState().resetLife();
       }
       cam.viewport.add(Life());
     } catch (e) {

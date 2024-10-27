@@ -54,30 +54,11 @@ class Rock extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
 
   @override
   void update(double dt) {
-    // Lưu vị trí cũ trước khi di chuyển
-    double oldY = position.y;
     
     if (isVertical) {
       _moveVertically(dt);
     } else {
       _moveHorizontally(dt);
-    }
-    // Nếu player đang đứng trên rock, di chuyển player theo
-    if (isPlayerRiding && isPlayerOnTop()) {
-      double deltaY = position.y - oldY;
-      player.position.y += deltaY;
-      player.velocity.y = 0;
-      player.isOnGround = true;
-      print(oldY);
-    print('Rock position: $position');
-    print('Player position: ${player.position}');
-    }
-
-    // Kiểm tra xem player còn đứng trên rock không
-    if (isPlayerRiding) {
-      if (!isPlayerOnTop()) {
-        isPlayerRiding = false;
-      }
     }
 
     super.update(dt);
@@ -90,6 +71,17 @@ class Rock extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
       moveDirection = 1;
     }
     position.y += moveDirection * moveSpeed * dt;
+    if (isPlayerRiding && isPlayerOnTop()) {
+      player.position.y += moveDirection * moveSpeed * dt;
+      player.velocity.y = 0;
+      player.isOnGround = true;
+    }
+
+    if (isPlayerRiding) {
+      if (!isPlayerOnTop()) {
+        isPlayerRiding = false;
+      }
+    }
   }
 
   void _moveHorizontally(double dt) {
@@ -99,25 +91,18 @@ class Rock extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
       moveDirection = 1;
     }
     position.x += moveDirection * moveSpeed * dt;
+    
   }
 
   bool isPlayerOnTop() {
-  final playerBox = player.position + Vector2(player.hitbox.offsetX, player.hitbox.offsetY);
-  final rockBox = position;
-
-  // Define the top surface of the rock
-  final rockTopY = rockBox.y; // The Y position of the rock
-  final rockBottomY = rockTopY + 5; // Adjust according to the height of the rock
-
-  // Check if the player is on top of the rock
-  bool isOnTop = playerBox.y + player.hitbox.height <= rockBottomY &&
-      playerBox.y + player.hitbox.height >= rockTopY &&
-      playerBox.x + player.hitbox.width > rockBox.x &&
-      playerBox.x < rockBox.x + size.x;
-
-  return isOnTop;
-}
-
+    final playerBox = player.position ;
+    final rockBox = position;
+    
+    // Kiểm tra xem player có đứng trên rock không
+    bool isOnTop = playerBox.y + player.hitbox.height >= rockBox.y - 5 && playerBox.x < 26;
+    
+    return isOnTop;
+  }
 
   void collidedWithPlayer() {
     if (isPlayerOnTop()) {

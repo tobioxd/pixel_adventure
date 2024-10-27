@@ -11,7 +11,6 @@ import 'package:pixel_adventure/core/utils/custom_hitbox.dart';
 import 'package:pixel_adventure/game/enemies/rhino.dart';
 import 'package:pixel_adventure/game/obstacles/fire.dart';
 import 'package:pixel_adventure/game/items/fruit.dart';
-import 'package:pixel_adventure/game/obstacles/rock.dart';
 import 'package:pixel_adventure/game/states/globalstate.dart';
 import 'package:pixel_adventure/game/obstacles/saw.dart';
 import 'package:pixel_adventure/game/obstacles/saw1.dart';
@@ -102,23 +101,20 @@ class Player extends SpriteAnimationGroupComponent
       if (other is Fruit) {
         other.collidedWithPlayer();
       }
-      // if (other is Saw) _response();
+      if (other is Saw) _response();
       if (other is Saw1) _response();
       if (other is Saw2) _response();
       if (other is Saw3) _response();
       if (other is Chicken) {
         other.collidedWithPlayer();
       }
-      // if (other is Rhino) {
-      //   other.collidedWithPlayer();
-      // }
+      if (other is Rhino) {
+        other.collidedWithPlayer();
+      }
       if (other is Checkpoint) {
         if (GlobalState().numberFruits == 0) {
           _finish();
         }
-      }
-      if (other is Rock) {
-        other.collidedWithPlayer();
       }
       if (other is Fire) {
         _response();
@@ -298,7 +294,7 @@ class Player extends SpriteAnimationGroupComponent
     current = PlayerState.hit;
     Future.delayed(hitDuration, () {
       if (GlobalState().life > 1) {
-        GlobalState().life--;
+        GlobalState().minusLife();
         scale.x = 1;
         position = startingPosition - Vector2.all(32);
         current = PlayerState.appearing;
