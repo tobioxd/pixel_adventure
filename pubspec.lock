@@ -405,6 +405,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+  sprite:
+    dependency: "direct main"
+    description:
+      name: sprite
+      sha256: af4f18945b6f6302e2b510134705b70f09a6ba47f4a378cf2946b9ac7954bb22
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   stack_trace:
     dependency: transitive
     description:

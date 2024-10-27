@@ -22,12 +22,15 @@ class PixelAdventure extends FlameGame
         DragCallbacks,
         HasCollisionDetection,
         TapCallbacks {
-  PixelAdventure({required this.playSoundsBackground});
+  PixelAdventure(
+      {required this.playSoundsBackground, required String playerName}) {
+    GlobalState().playerName = playerName;
+  }
 
   @override
   Color backgroundColor() => const Color(0xFF211F30);
   late CameraComponent cam;
-  Player player = Player(character: 'Mask Dude');
+  Player player = Player(character: GlobalState().playerName);
   late JoystickComponent joystick;
   late SoundButton soundButton;
   bool showControls = true;
@@ -123,7 +126,7 @@ class PixelAdventure extends FlameGame
     _loadLevel();
   }
 
-  void loadFromNew(){
+  void loadFromNew() {
     removeWhere((component) {
       if (component is Level) {
         component.onRemove();
@@ -133,14 +136,14 @@ class PixelAdventure extends FlameGame
     });
 
     currentLevel = 0;
-    
+
     _loadLevel();
   }
 
   void _loadLevel() {
     try {
       // ignore: unnecessary_new
-      player = new Player(character: 'Mask Dude');
+      player = new Player(character: GlobalState().playerName);
       Level world = Level(
         player: player,
         levelName: levelNames[currentLevel],
@@ -164,11 +167,10 @@ class PixelAdventure extends FlameGame
       soundButton = SoundButton();
       cam.viewport.add(soundButton);
 
-      if(currentLevel == 0){
+      if (currentLevel == 0) {
         GlobalState().life = 3;
       }
       cam.viewport.add(Life());
-      
     } catch (e) {
       print('Error loading level: $e');
     }
