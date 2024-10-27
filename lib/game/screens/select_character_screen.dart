@@ -112,7 +112,7 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
                       ],
                     ),
                     child: const Text(
-                      'Select',
+                      'Chọn',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF211F30),

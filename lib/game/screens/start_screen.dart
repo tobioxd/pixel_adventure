@@ -1,6 +1,8 @@
 // lib/screens/start_screen.dart
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pixel_adventure/game/screens/pixel_adventure.dart';
 import 'package:pixel_adventure/game/screens/select_character_screen.dart';
 import 'package:pixel_adventure/game/states/sound_cubit.dart';
 
@@ -41,10 +43,17 @@ class _StartScreenState extends State<StartScreen> {
                 const SizedBox(height: 50),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
+                    Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => const SelectCharacterScreen(),
+                        builder: (context) => GameWidget(
+                          game: PixelAdventure(
+                            playSoundsBackground:
+                                context.read<SoundCubit>().state,
+                            playerName: 'Mask Dude',
+                          ),
+                        ),
                       ),
+                      (route) => false,
                     );
                   },
                   child: Container(
@@ -64,9 +73,46 @@ class _StartScreenState extends State<StartScreen> {
                       ],
                     ),
                     child: const Text(
-                      'Start Game',
+                      'Chơi ngay',
                       style: TextStyle(
                         fontSize: 25,
+                        color: Color(0xFF211F30),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SelectCharacterScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 50,
+                      vertical: 15,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.white,
+                          blurRadius: 10,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: const Text(
+                      'Chọn nhân vật',
+                      style: TextStyle(
+                        fontSize: 14,
                         color: Color(0xFF211F30),
                         fontWeight: FontWeight.bold,
                       ),
