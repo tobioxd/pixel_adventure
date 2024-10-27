@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="79">
+ <tileset firstgid="1" source="test.tsx"/>
+ <layer id="1" name="Background" width="40" height="23">
+  <properties>
+   <property name="BackgroundColor" value="Gray"/>
+  </properties>
+  <data encoding="csv">
+1073741850,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,46,5,
+25,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,536870974,0,23,
+25,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,536870974,0,23,
+25,0,0,0,536870974,0,0,0,192,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,104,0,0,0,0,0,0,0,0,0,536870974,0,23,
+25,0,0,0,536870974,0,0,0,236,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,148,0,0,0,0,0,0,0,0,0,536870974,0,23,
+25,101,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,103,0,0,0,536870974,0,23,
+25,0,0,0,536870974,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,101,103,23,
+25,0,0,0,536870974,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+25,0,0,0,536870974,0,0,0,0,536870974,0,104,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+25,0,0,0,536870974,0,0,0,0,536870974,0,148,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,123,0,0,0,0,0,0,0,0,23,
+25,0,0,0,536870974,0,101,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,103,23,
+25,0,0,0,536870974,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,536870974,0,0,23,
+25,0,0,0,536870974,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,536870974,0,0,23,
+25,0,0,0,536870974,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,536870974,0,0,23,
+25,0,0,0,536870974,0,0,0,104,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,104,0,0,0,0,0,0,0,0,536870974,0,0,23,
+25,0,0,0,536870974,0,0,0,148,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,148,0,0,0,0,0,0,0,0,536870974,0,0,23,
+25,101,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,102,103,0,0,0,0,536870974,0,0,23,
+25,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,101,102,103,0,0,536870974,0,0,23,
+25,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,536870974,0,0,23,
+25,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,101,102,103,23,
+25,0,0,0,536870974,0,0,124,125,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,0,0,0,0,0,0,0,0,0,0,0,0,23,
+25,0,0,0,536870974,0,0,146,147,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,536870974,0,123,0,0,0,0,0,0,0,0,0,0,0,23,
+26,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2147483674
+</data>
+ </layer>
+ <objectgroup id="2" name="Spawnpoints">
+  <object id="4" name="Player" type="Player" x="31.9622" y="287.23" width="32" height="32"/>
+  <object id="21" name="Bananas" type="Fruit" x="78.9316" y="46.8667" width="32" height="32"/>
+  <object id="22" name="Orange" type="Fruit" x="206.776" y="287.283" width="32" height="32"/>
+  <object id="23" name="Apple" type="Fruit" x="27.6288" y="206.947" width="32" height="32"/>
+  <object id="66" name="Apple" type="Fruit" x="366.676" y="287.758" width="32" height="32"/>
+  <object id="24" name="Cherries" type="Fruit" x="242.826" y="128.222" width="32" height="32"/>
+  <object id="25" name="Cherries" type="Fruit" x="274.826" y="128.222" width="32" height="32"/>
+  <object id="26" name="Cherries" type="Fruit" x="258.826" y="96.2223" width="32" height="32"/>
+  <object id="27" name="Cherries" type="Fruit" x="461.123" y="48.1036" width="32" height="32"/>
+  <object id="28" name="Cherries" type="Fruit" x="493.123" y="48.1036" width="32" height="32"/>
+  <object id="29" name="Cherries" type="Fruit" x="477.123" y="16.1036" width="32" height="32"/>
+  <object id="30" name="Kiwi" type="Fruit" x="591.715" y="62.7661" width="32" height="32"/>
+  <object id="31" name="Kiwi" type="Fruit" x="478.433" y="224.654" width="32" height="32"/>
+  <object id="34" type="Saw" x="543.281" y="256.715" width="32" height="32">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
+   </properties>
+  </object>
+  <object id="36" type="Checkpoint" x="-0.49364" y="15.6028" width="64" height="64"/>
+  <object id="43" name="Orange" type="Fruit" x="239.792" y="16.3272" width="32" height="32"/>
+  <object id="65" name="Orange" type="Fruit" x="111.599" y="287.708" width="32" height="32"/>
+  <object id="45" name="Cherries" type="Fruit" x="238.528" y="175.102" width="32" height="32"/>
+  <object id="46" name="Cherries" type="Fruit" x="143.435" y="223.814" width="32" height="32"/>
+  <object id="47" name="Cherries" type="Fruit" x="463.422" y="320.14" width="32" height="32"/>
+  <object id="49" type="Saw" x="551.197" y="71.2091" width="32" height="32">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
+   </properties>
+  </object>
+  <object id="51" type="Saw" x="54.1873" y="152.644" width="32" height="32">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
+   </properties>
+  </object>
+  <object id="52" name="Kiwi" type="Fruit" x="511.382" y="239.433" width="32" height="32"/>
+  <object id="67" name="Kiwi" type="Fruit" x="584.993" y="271.585" width="32" height="32"/>
+  <object id="74" name="Rhino" type="Rhino" x="271.377" y="320.864" width="32" height="32">
+   <properties>
+    <property name="offNeg" type="float" value="12"/>
+    <property name="offPos" type="float" value="5"/>
+   </properties>
+  </object>
+  <object id="76" name="Rhino" type="Rhino" x="272.044" y="224.864" width="32" height="32">
+   <properties>
+    <property name="offNeg" type="float" value="12"/>
+    <property name="offPos" type="float" value="5"/>
+   </properties>
+  </object>
+  <object id="77" name="Rhino" type="Rhino" x="319.377" y="127.531" width="32" height="32">
+   <properties>
+    <property name="offNeg" type="float" value="12"/>
+    <property name="offPos" type="float" value="5"/>
+   </properties>
+  </object>
+  <object id="78" name="Rhino" type="Rhino" x="272.71" y="47.5311" width="32" height="32">
+   <properties>
+    <property name="offNeg" type="float" value="12"/>
+    <property name="offPos" type="float" value="5"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="Collisions">
+  <object id="7" x="0.389808" y="-0.800446" width="16" height="352.342"/>
+  <object id="8" x="16.3898" y="-0.205319" width="606.557" height="16"/>
+  <object id="9" x="624.205" y="0.321369" width="16" height="366.694"/>
+  <object id="10" x="-0.273759" y="352.205" width="625.622" height="16"/>
+  <object id="11" x="480.89" y="142.682" width="16" height="16"/>
+  <object id="73" x="590.723" y="95.3483" width="34" height="16"/>
+  <object id="71" x="431.223" y="335.682" width="16" height="16"/>
+  <object id="70" x="431.223" y="224.015" width="17.3333" height="31.3333"/>
+  <object id="12" x="112.335" y="319.872" width="31.5832" height="31.9925"/>
+  <object id="13" x="175.34" y="129.249" width="17" height="31"/>
+  <object id="68" x="126.34" y="223.916" width="17" height="31"/>
+  <object id="69" x="126.673" y="48.5827" width="17" height="31"/>
+  <object id="14" x="432.387" y="47.7731" width="15.3333" height="31.6667"/>
+  <object id="15" x="16.1437" y="79.8717" width="527.667" height="16"/>
+  <object id="16" type="Platform" x="576.265" y="303.941" width="47.5" height="16"/>
+  <object id="35" x="96.3141" y="159.705" width="528.091" height="16"/>
+  <object id="41" x="15.984" y="255.678" width="495.5" height="15.9282"/>
+  <object id="54" x="496.667" y="272.667" width="47.5" height="16"/>
+ </objectgroup>
+</map>
