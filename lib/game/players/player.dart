@@ -44,7 +44,7 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation appearingAnimation;
   late final SpriteAnimation disappearingAnimation;
 
-  static const double _gravity = 10;            
+  static const double _gravity = 15;
   static const double _jumpForce = 250;
   static const double _terminalVelocity = 300;
   double horizontalMovement = 0;
@@ -80,9 +80,8 @@ class Player extends SpriteAnimationGroupComponent
 
   @override
   void update(double dt) {
-
-    const double maxDt = 1 / 60;  // For a max of 60 frames per second
-    dt = dt > maxDt ? maxDt : dt; 
+    // const double maxDt = 1 / 60;  // For a max of 60 frames per second
+    // dt = dt > maxDt ? maxDt : dt;
 
     if (!gotHit) {
       _updatePlayerState();
@@ -93,23 +92,6 @@ class Player extends SpriteAnimationGroupComponent
     }
     super.update(dt);
   }
-
-  // @override
-  // bool onKeyEvent(KeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-  //   horizontalMovement = 0;
-  //   final isLeftKeyPressed = keysPressed.contains(LogicalKeyboardKey.arrowLeft);
-  //   final isRightKeyPressed =
-  //       keysPressed.contains(LogicalKeyboardKey.arrowRight);
-
-  //   horizontalMovement += isLeftKeyPressed ? -1 : 0;
-  //   horizontalMovement += isRightKeyPressed ? 1 : 0;
-
-  //   hasJumped = keysPressed.contains(LogicalKeyboardKey.arrowUp);
-
-  //   isFastFalling = keysPressed.contains(LogicalKeyboardKey.arrowDown);
-
-  //   return super.onKeyEvent(event, keysPressed);
-  // }
 
   @override
   void onCollisionStart(
@@ -207,11 +189,19 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   void _updatePlayerMovement(double dt) {
-    if (hasJumped && isOnGround) _playerJump(dt);
+    if (hasJumped && isOnGround) {
+      _playerJump(dt);
+      // Reset horizontal velocity when jumping
+      velocity.x = 0;
+      horizontalMovement = 0;
+    }
 
-    if (velocity.y > _gravity) isOnGround = false; // optional
+    // Apply horizontal movement after jump
+    if (velocity.y > _gravity) isOnGround = false;
 
-    velocity.x = horizontalMovement * moveSpeed;
+    // Scale down horizontal speed during jump/fall
+    double speedMultiplier = isOnGround ? 1.0 : 0.8; // Reduce air control
+    velocity.x = horizontalMovement * moveSpeed * speedMultiplier;
     position.x += velocity.x * dt;
   }
 
@@ -220,6 +210,7 @@ class Player extends SpriteAnimationGroupComponent
       FlameAudio.play('jump.wav', volume: game.soundVolume / 2);
     }
 
+    // Apply pure vertical jump force
     velocity.y = -_jumpForce;
     position.y += velocity.y * dt;
     isOnGround = false;
@@ -248,11 +239,17 @@ class Player extends SpriteAnimationGroupComponent
   void _applyGravity(double dt) {
     double gravity = _gravity;
     if (isFastFalling) {
-      gravity *= 11; // Increase gravity when fast falling
+      gravity *= 11;
     }
 
     velocity.y += gravity;
     velocity.y = velocity.y.clamp(-_jumpForce, _terminalVelocity);
+
+    // Add air resistance when moving horizontally in air
+    if (!isOnGround && velocity.x != 0) {
+      velocity.x *= 0.98; // Slight air resistance
+    }
+
     position.y += velocity.y * dt;
   }
 
@@ -307,7 +304,6 @@ class Player extends SpriteAnimationGroupComponent
           _updatePlayerState();
           Future.delayed(canMoveDuration, () => gotHit = false);
         });
-        
       } else {
         game.loadFromNew();
       }
