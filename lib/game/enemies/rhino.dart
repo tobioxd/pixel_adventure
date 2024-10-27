@@ -109,25 +109,55 @@ class Rhino extends SpriteAnimationGroupComponent
     }
   }
 
+  // void _hitEndpoint() async {
+  //   if (!isHittingWall) {
+  //     isHittingWall = true;
+  //     current = RhinoState.hitwall;
+  //     velocity.x = 0; // Stop moving initially
+
+  //     // Delay before moving backward
+  //     await Future.delayed(const Duration(milliseconds: 500));
+
+  //     // Move backward without changing direction
+  //     position.x -= 20 * targetDirection; // Adjust the distance as needed
+
+  //     // Delay before moving backward
+  //     await Future.delayed(const Duration(milliseconds: 500));
+
+  //     targetDirection *= -1; // Đổi hướng
+  //     isMovingRight = !isMovingRight;
+
+  //     // After moving backward, reset hitting wall status
+  //     isHittingWall = false;
+  //   }
+  // }
+
   void _hitEndpoint() async {
     if (!isHittingWall) {
       isHittingWall = true;
       current = RhinoState.hitwall;
-      velocity.x = 0; // Stop moving initially
+      velocity.x = 0; // Dừng di chuyển ban đầu
 
-      // Delay before moving backward
-      await Future.delayed(const Duration(milliseconds: 500));
-      
-      // Move backward without changing direction
-      position.x -= 20 * targetDirection; // Adjust the distance as needed
+      // Rhino nảy lên một chút
+      position.y -= 20; // Điều chỉnh khoảng cách nảy lên
+      await Future.delayed(
+          const Duration(milliseconds: 200)); // Đợi một chút khi nảy lên
 
-      // Delay before moving backward
+      // Sau đó, Rhino rơi xuống lại vị trí cũ
+      position.y += 20;
+      await Future.delayed(
+          const Duration(milliseconds: 200)); // Đợi một chút khi rơi xuống
+
+      // Di chuyển lùi lại mà không thay đổi hướng
+      position.x -= 20 * targetDirection; // Điều chỉnh khoảng cách bật lùi
+
+      // Chờ một chút trước khi đổi hướng
       await Future.delayed(const Duration(milliseconds: 500));
 
       targetDirection *= -1; // Đổi hướng
       isMovingRight = !isMovingRight;
 
-      // After moving backward, reset hitting wall status
+      // Sau khi di chuyển lùi, reset trạng thái đụng tường
       isHittingWall = false;
     }
   }
