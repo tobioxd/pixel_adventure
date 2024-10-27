@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="79">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="81">
  <tileset firstgid="1" source="test.tsx"/>
  <layer id="1" name="Background" width="40" height="23">
   <properties>
@@ -32,10 +32,10 @@
 </data>
  </layer>
  <objectgroup id="2" name="Spawnpoints">
-  <object id="4" name="Player" type="Player" x="31.9622" y="287.23" width="32" height="32"/>
+  <object id="4" name="Player" type="Player" x="79.2955" y="207.23" width="32" height="32"/>
   <object id="21" name="Bananas" type="Fruit" x="78.9316" y="46.8667" width="32" height="32"/>
   <object id="22" name="Orange" type="Fruit" x="206.776" y="287.283" width="32" height="32"/>
-  <object id="23" name="Apple" type="Fruit" x="27.6288" y="206.947" width="32" height="32"/>
+  <object id="23" name="Apple" type="Fruit" x="16.2955" y="95.6137" width="32" height="32"/>
   <object id="66" name="Apple" type="Fruit" x="366.676" y="287.758" width="32" height="32"/>
   <object id="24" name="Cherries" type="Fruit" x="242.826" y="128.222" width="32" height="32"/>
   <object id="25" name="Cherries" type="Fruit" x="274.826" y="128.222" width="32" height="32"/>
@@ -55,8 +55,9 @@
   <object id="36" type="Checkpoint" x="-0.49364" y="15.6028" width="64" height="64"/>
   <object id="43" name="Orange" type="Fruit" x="239.792" y="16.3272" width="32" height="32"/>
   <object id="65" name="Orange" type="Fruit" x="111.599" y="287.708" width="32" height="32"/>
-  <object id="45" name="Cherries" type="Fruit" x="238.528" y="175.102" width="32" height="32"/>
-  <object id="46" name="Cherries" type="Fruit" x="143.435" y="223.814" width="32" height="32"/>
+  <object id="45" name="Cherries" type="Fruit" x="262.333" y="176.292" width="32" height="32"/>
+  <object id="79" name="Cherries" type="Fruit" x="352.197" y="175.102" width="32" height="32"/>
+  <object id="46" name="Cherries" type="Fruit" x="176.167" y="177.394" width="32" height="32"/>
   <object id="47" name="Cherries" type="Fruit" x="463.422" y="320.14" width="32" height="32"/>
   <object id="49" type="Saw" x="551.197" y="71.2091" width="32" height="32">
    <properties>
@@ -65,14 +66,21 @@
     <property name="offPos" type="float" value="3"/>
    </properties>
   </object>
-  <object id="51" type="Saw" x="54.1873" y="152.644" width="32" height="32">
+  <object id="51" type="Saw1" x="54.1873" y="152.644" width="32" height="32">
    <properties>
     <property name="isVertical" type="bool" value="true"/>
     <property name="offNeg" type="float" value="4"/>
     <property name="offPos" type="float" value="3"/>
    </properties>
   </object>
-  <object id="52" name="Kiwi" type="Fruit" x="511.382" y="239.433" width="32" height="32"/>
+  <object id="80" type="Rock" x="11.854" y="182.977" width="32" height="32">
+   <properties>
+    <property name="isVertical" type="bool" value="true"/>
+    <property name="offNeg" type="float" value="4"/>
+    <property name="offPos" type="float" value="3"/>
+   </properties>
+  </object>
+  <object id="52" name="Kiwi" type="Fruit" x="511.746" y="239.251" width="32" height="32"/>
   <object id="67" name="Kiwi" type="Fruit" x="584.993" y="271.585" width="32" height="32"/>
   <object id="74" name="Rhino" type="Rhino" x="271.377" y="320.864" width="32" height="32">
    <properties>
@@ -116,7 +124,7 @@
   <object id="15" x="16.1437" y="79.8717" width="527.667" height="16"/>
   <object id="16" type="Platform" x="576.265" y="303.941" width="47.5" height="16"/>
   <object id="35" x="96.3141" y="159.705" width="528.091" height="16"/>
-  <object id="41" x="15.984" y="255.678" width="495.5" height="15.9282"/>
-  <object id="54" x="496.667" y="272.667" width="47.5" height="16"/>
+  <object id="41" x="15.984" y="255.678" width="495.773" height="15.9282"/>
+  <object id="54" x="496.031" y="271.758" width="47.9545" height="16"/>
  </objectgroup>
 </map>

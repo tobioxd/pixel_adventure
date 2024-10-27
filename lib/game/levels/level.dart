@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:pixel_adventure/game/enemies/rhino.dart';
+import 'package:pixel_adventure/game/obstacles/rock.dart';
 import 'package:pixel_adventure/game/uis/background_tile.dart';
 import 'package:pixel_adventure/game/components/checkpoint.dart';
 import 'package:pixel_adventure/game/enemies/chicken.dart';
@@ -178,6 +179,19 @@ class Level extends World
               position: Vector2(spawnPoint.x, spawnPoint.y),
             );
             add(fire);
+            break;
+          case 'Rock':
+            final isVertical = spawnPoint.properties.getValue('isVertical');
+            final offNeg = spawnPoint.properties.getValue('offNeg');
+            final offPos = spawnPoint.properties.getValue('offPos');
+            final rock = Rock(
+              isVertical: isVertical,
+              offNeg: offNeg,
+              offPos: offPos,
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            add(rock);
             break;
           default:
         }

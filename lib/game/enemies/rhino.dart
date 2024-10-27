@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
-import 'package:pixel_adventure/game/components/collision_block.dart';
 import 'package:pixel_adventure/game/players/player.dart';
 import 'package:pixel_adventure/game/screens/pixel_adventure.dart';
 
@@ -27,6 +26,7 @@ class Rhino extends SpriteAnimationGroupComponent
   static const runSpeed = 260;
   static const _bounceHeight = 280.0;
   final textureSize = Vector2(52, 34);
+  int stompCount = 0;
 
   Vector2 velocity = Vector2.zero();
   double rangeNeg = 0;
@@ -109,55 +109,32 @@ class Rhino extends SpriteAnimationGroupComponent
     }
   }
 
-  // void _hitEndpoint() async {
-  //   if (!isHittingWall) {
-  //     isHittingWall = true;
-  //     current = RhinoState.hitwall;
-  //     velocity.x = 0; // Stop moving initially
-
-  //     // Delay before moving backward
-  //     await Future.delayed(const Duration(milliseconds: 500));
-
-  //     // Move backward without changing direction
-  //     position.x -= 20 * targetDirection; // Adjust the distance as needed
-
-  //     // Delay before moving backward
-  //     await Future.delayed(const Duration(milliseconds: 500));
-
-  //     targetDirection *= -1; // Đổi hướng
-  //     isMovingRight = !isMovingRight;
-
-  //     // After moving backward, reset hitting wall status
-  //     isHittingWall = false;
-  //   }
-  // }
-
   void _hitEndpoint() async {
     if (!isHittingWall) {
       isHittingWall = true;
       current = RhinoState.hitwall;
-      velocity.x = 0; // Dừng di chuyển ban đầu
+      velocity.x = 0;
 
-      // Rhino nảy lên một chút
-      position.y -= 20; // Điều chỉnh khoảng cách nảy lên
-      await Future.delayed(
-          const Duration(milliseconds: 200)); // Đợi một chút khi nảy lên
+      position.y -= 12;
+      await Future.delayed(const Duration(milliseconds: 200));
 
-      // Sau đó, Rhino rơi xuống lại vị trí cũ
-      position.y += 20;
-      await Future.delayed(
-          const Duration(milliseconds: 200)); // Đợi một chút khi rơi xuống
+      position.x -= 10 * targetDirection;
+      await Future.delayed(const Duration(milliseconds: 100));
 
-      // Di chuyển lùi lại mà không thay đổi hướng
-      position.x -= 20 * targetDirection; // Điều chỉnh khoảng cách bật lùi
+      for (int i = 1; i <= 6; i++) {
+        position.x -= 1 * targetDirection;
+        await Future.delayed(const Duration(milliseconds: 1));
 
-      // Chờ một chút trước khi đổi hướng
+        position.y += 2;
+        await Future.delayed(const Duration(milliseconds: 1));
+      }
+
+      position.x -= targetDirection;
       await Future.delayed(const Duration(milliseconds: 500));
 
       targetDirection *= -1; // Đổi hướng
       isMovingRight = !isMovingRight;
 
-      // Sau khi di chuyển lùi, reset trạng thái đụng tường
       isHittingWall = false;
     }
   }
@@ -206,11 +183,22 @@ class Rhino extends SpriteAnimationGroupComponent
       if (game.playSounds) {
         FlameAudio.play('bounce.wav', volume: game.soundVolume);
       }
-      gotStomped = true;
-      current = RhinoState.hit;
-      player.velocity.y = -_bounceHeight;
-      await animationTicker?.completed;
-      removeFromParent();
+
+      // Increment the stomp count and check if it's been stomped twice
+      stompCount++;
+      if (stompCount >= 2) {
+        gotStomped = true;
+        current = RhinoState.hit;
+        player.velocity.y = -_bounceHeight;
+        await animationTicker?.completed;
+        removeFromParent(); // Remove Rhino after the second stomp
+      } else {
+        // Temporarily set to hit state and bounce player, but Rhino stays active
+        current = RhinoState.hit;
+        player.velocity.y = -_bounceHeight;
+        await Future.delayed(const Duration(milliseconds: 10));
+        current = RhinoState.idle; // Return Rhino to idle after bounce effect
+      }
     } else {
       player.collidedwithEnemy();
     }
