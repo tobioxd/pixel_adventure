@@ -79,6 +79,7 @@ flutter:
     - assets/images/Items/Checkpoints/Checkpoint/
     - assets/audio/
     - assets/images/Enemies/Chicken/
+    - assets/images/Enemies/Rino/
     - assets/images/Traps/Fire/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

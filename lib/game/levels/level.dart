@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:pixel_adventure/game/enemies/rhino.dart';
 import 'package:pixel_adventure/game/uis/background_tile.dart';
 import 'package:pixel_adventure/game/components/checkpoint.dart';
 import 'package:pixel_adventure/game/enemies/chicken.dart';
@@ -42,8 +43,8 @@ class Level extends World
     add(level);
 
     _scrollingBackground();
-    _spawningObjects();
     _addCollisions();
+    _spawningObjects();
 
     return super.onLoad();
   }
@@ -160,6 +161,17 @@ class Level extends World
               offPos: offPos,
             );
             add(chicken);
+            break;
+          case 'Rhino':
+            final offNeg = spawnPoint.properties.getValue('offNeg');
+            final offPos = spawnPoint.properties.getValue('offPos');
+            final rhino = Rhino(
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+              offNeg: offNeg,
+              offPos: offPos,
+            );
+            add(rhino);
             break;
           case 'Fire':
             final fire = Fire(
