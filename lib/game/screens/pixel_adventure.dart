@@ -164,7 +164,9 @@ class PixelAdventure extends FlameGame
       soundButton = SoundButton();
       cam.viewport.add(soundButton);
 
-      GlobalState().life = 3;
+      if(currentLevel == 0){
+        GlobalState().life = 3;
+      }
       cam.viewport.add(Life());
       
     } catch (e) {

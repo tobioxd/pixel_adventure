@@ -44,9 +44,9 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation appearingAnimation;
   late final SpriteAnimation disappearingAnimation;
 
-  final double _gravity = 10;
-  final double _jumpForce = 250;
-  final double _terminalVelocity = 300;
+  static const double _gravity = 10;            
+  static const double _jumpForce = 250;
+  static const double _terminalVelocity = 300;
   double horizontalMovement = 0;
   double moveSpeed = 100;
   Vector2 velocity = Vector2.zero();
@@ -80,6 +80,10 @@ class Player extends SpriteAnimationGroupComponent
 
   @override
   void update(double dt) {
+
+    const double maxDt = 1 / 60;  // For a max of 60 frames per second
+    dt = dt > maxDt ? maxDt : dt; 
+
     if (!gotHit) {
       _updatePlayerState();
       _updatePlayerMovement(dt);
