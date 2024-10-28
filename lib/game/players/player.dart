@@ -287,7 +287,7 @@ class Player extends SpriteAnimationGroupComponent
   void _response() {
     if (game.playSounds) FlameAudio.play('hit.wav', volume: game.soundVolume);
 
-    const hitDuration = Duration(seconds: 1);
+    const hitDuration = Duration(milliseconds: 500);
     const appearingDuration = Duration(milliseconds: 400);
     const canMoveDuration = Duration(milliseconds: 200);
     gotHit = true;

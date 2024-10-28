@@ -44,11 +44,11 @@
             }
         },
         "Level-04.tmx": {
-            "scale": 1.6803124999999999,
-            "selectedLayer": 0,
+            "scale": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 320.1785382183374,
-                "y": 196.3920401710991
+                "x": 557.8333333333333,
+                "y": 97.66666666666667
             }
         },
         "Pixel Adventure.tsx": {
@@ -56,7 +56,8 @@
             "scaleInEditor": 1
         },
         "test.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         }
     },
     "last.externalTilesetPath": "C:/Users/pc/Desktop/mobile/pixel_adventure/assets/tiles",
@@ -71,7 +72,8 @@
         "Level-01.tmx",
         "Level-02.tmx",
         "Level-03.tmx",
-        "Level-04.tmx"
+        "Level-04.tmx",
+        "test.tsx"
     ],
     "project": "Pixel Adventure.tiled-project",
     "recentFiles": [
@@ -79,6 +81,7 @@
         "Level-01.tmx",
         "Level-02.tmx",
         "Level-03.tmx",
+        "test.tsx",
         "Level-04.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",

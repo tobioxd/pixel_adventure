@@ -50,7 +50,7 @@ class PixelAdventure extends FlameGame
     // Load all images into cache
     await images.loadAllImages();
 
-    _loadLevel();
+    loadFromNew();
 
     await _initBackgroundMusic();
 
