@@ -1,7 +1,6 @@
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pixel_adventure/game/screens/pixel_adventure.dart';
+import 'package:pixel_adventure/game/states/player_cubit.dart';
 import 'package:pixel_adventure/game/states/sound_cubit.dart';
 import 'package:sprite/sprite.dart';
 
@@ -81,19 +80,11 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => GameWidget(
-                          game: PixelAdventure(
-                            playSoundsBackground:
-                                context.read<SoundCubit>().state,
-                            playerName:
-                                characters[selectedCharacter].split('/')[3],
-                          ),
-                        ),
-                      ),
-                      (route) => false,
-                    );
+                    context.read<PlayerCutbit>().changePlayer(
+                          playerName:
+                              characters[selectedCharacter].split('/')[3],
+                        );
+                    Navigator.of(context).pop();
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pixel_adventure/game/screens/pixel_adventure.dart';
 import 'package:pixel_adventure/game/screens/select_character_screen.dart';
+import 'package:pixel_adventure/game/states/player_cubit.dart';
 import 'package:pixel_adventure/game/states/sound_cubit.dart';
 
 class StartScreen extends StatefulWidget {
@@ -43,13 +44,25 @@ class _StartScreenState extends State<StartScreen> {
                 const SizedBox(height: 50),
                 GestureDetector(
                   onTap: () {
+                    // Navigator.of(context).pushAndRemoveUntil(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => GameWidget(
+                    //       game: PixelAdventure(
+                    //         playSoundsBackground:
+                    //             context.read<SoundCubit>().state,
+                    //         playerName: 'Mask Dude',
+                    //       ),
+                    //     ),
+                    //   ),
+                    //   (route) => false,
+                    // );
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (context) => GameWidget(
                           game: PixelAdventure(
                             playSoundsBackground:
                                 context.read<SoundCubit>().state,
-                            playerName: 'Mask Dude',
+                            playerName: context.read<PlayerCutbit>().state,
                           ),
                         ),
                       ),
@@ -109,13 +122,17 @@ class _StartScreenState extends State<StartScreen> {
                         ),
                       ],
                     ),
-                    child: const Text(
-                      'Chọn nhân vật',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xFF211F30),
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: BlocBuilder<PlayerCutbit, String>(
+                      builder: (context, state) {
+                        return Text(
+                          context.read<PlayerCutbit>().state,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF211F30),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
