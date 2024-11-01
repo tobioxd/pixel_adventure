@@ -73,6 +73,7 @@ class Fruit extends SpriteAnimationComponent
       removeFromParent();
 
       GlobalState().numberFruits --;
+      GlobalState().point += 10; 
       
     }
   }

@@ -136,6 +136,8 @@ class PixelAdventure extends FlameGame
       return component is Level || component is CameraComponent;
     });
 
+    print(GlobalState().point);
+    GlobalState().resetPoint();
     currentLevel = 0;
 
     _loadLevel();
@@ -170,6 +172,8 @@ class PixelAdventure extends FlameGame
 
       if (currentLevel == 0) {
         GlobalState().resetLife();
+        GlobalState().resetPoint();
+        GlobalState().start();
       }
       cam.viewport.add(Life());
     } catch (e) {
