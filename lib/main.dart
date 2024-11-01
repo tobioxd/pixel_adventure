@@ -1,10 +1,10 @@
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pixel_adventure/core/services/get_it_service.dart';
-import 'package:pixel_adventure/game/screens/start_screen.dart';
-import 'package:pixel_adventure/game/states/player_cubit.dart';
-import 'package:pixel_adventure/game/states/sound_cubit.dart';
+import 'package:pixel_adventure/cores/services/get_it_service.dart';
+import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
+import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
+import 'package:pixel_adventure/views/start_screen/start_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
