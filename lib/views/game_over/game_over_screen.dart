@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pixel_adventure/commons/widgets/app_button.dart';
 import 'package:pixel_adventure/viewModels/game_result/game_result_cubit.dart';
 import 'package:pixel_adventure/viewModels/game_result/game_result_state.dart';
+import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
 import 'package:pixel_adventure/views/start/start_screen.dart';
 
 class GameOverScreen extends StatelessWidget {
@@ -130,6 +131,9 @@ class GameOverScreen extends StatelessWidget {
                   ),
                   (route) => false,
                 );
+                context
+                    .read<SoundCubit>()
+                    .playSound(context.read<SoundCubit>().state);
               },
             ),
           ],

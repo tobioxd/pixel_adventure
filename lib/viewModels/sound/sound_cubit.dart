@@ -17,4 +17,13 @@ class SoundCubit extends Cubit<bool> {
     }
     emit(!state);
   }
+
+  void playSound(bool isPlay) {
+    if (isPlay) {
+      FlameAudio.bgm.play('backgroundsound1.mp3');
+    } else {
+      FlameAudio.bgm.stop();
+    }
+    emit(isPlay);
+  }
 }
