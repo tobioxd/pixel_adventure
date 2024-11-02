@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pixel_adventure/commons/widgets/app_button.dart';
+import 'package:pixel_adventure/commons/widgets/high_light_text.dart';
 import 'package:pixel_adventure/viewModels/game_result/game_result_cubit.dart';
 import 'package:pixel_adventure/viewModels/game_result/game_result_state.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
@@ -33,20 +34,9 @@ class GameOverScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Kết quả',
-              style: TextStyle(
-                fontSize: 44,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                shadows: [
-                  Shadow(
-                    blurRadius: 20.0,
-                    color: Colors.white,
-                    offset: Offset(0, 0),
-                  ),
-                ],
-              ),
+            const HighLightText(
+              text: "Kết thúc",
+              fontSize: 44,
             ),
             const SizedBox(
               height: 40,

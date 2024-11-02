@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pixel_adventure/commons/widgets/app_button.dart';
+import 'package:pixel_adventure/commons/widgets/high_light_text.dart';
 import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
 import 'package:sprite/sprite.dart';
@@ -48,20 +49,9 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  characters[selectedCharacter].split('/')[3],
-                  style: const TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 20.0,
-                        color: Colors.white,
-                        offset: Offset(0, 0),
-                      ),
-                    ],
-                  ),
+                HighLightText(
+                  text: characters[selectedCharacter].split('/')[3],
+                  fontSize: 24,
                 ),
                 const SizedBox(
                   height: 16,

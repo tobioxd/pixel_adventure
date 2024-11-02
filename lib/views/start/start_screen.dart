@@ -3,9 +3,13 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pixel_adventure/commons/widgets/app_button.dart';
+import 'package:pixel_adventure/commons/widgets/high_light_text.dart';
+import 'package:pixel_adventure/cores/services/get_it_service.dart';
+import 'package:pixel_adventure/viewModels/history/history_cubit.dart';
 import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
 import 'package:pixel_adventure/views/game/pixel_adventure.dart';
+import 'package:pixel_adventure/views/history/history_screen.dart';
 import 'package:pixel_adventure/views/select_character/select_character_screen.dart';
 import 'package:sprite/sprite.dart';
 
@@ -28,20 +32,9 @@ class _StartScreenState extends State<StartScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Spacer(),
-                const Text(
-                  'Pixel Adventure',
-                  style: TextStyle(
-                    fontSize: 50,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 20.0,
-                        color: Colors.white,
-                        offset: Offset(0, 0),
-                      ),
-                    ],
-                  ),
+                const HighLightText(
+                  text: "Pixel Adventure",
+                  fontSize: 50,
                 ),
                 const SizedBox(height: 50),
                 SizedBox(
@@ -80,7 +73,15 @@ class _StartScreenState extends State<StartScreen> {
                       Expanded(
                         child: AppButton(
                           buttonText: "Lịch sử",
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => BlocProvider<HistoryCubit>(
+                                create: (BuildContext context) =>
+                                    getIt<HistoryCubit>()..loadHistory(),
+                                child: const HistoryScreen(),
+                              ),
+                            ));
+                          },
                         ),
                       ),
                     ],
