@@ -7,6 +7,7 @@ import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
 import 'package:pixel_adventure/views/game/pixel_adventure.dart';
 import 'package:pixel_adventure/views/select_character/select_character_screen.dart';
+import 'package:sprite/sprite.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({Key? key}) : super(key: key);
@@ -43,63 +44,46 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                 ),
                 const SizedBox(height: 50),
-                AppButton(
-                  onTap: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => GameWidget(
-                          game: PixelAdventure(
-                            context: context,
-                            playSoundsBackground:
-                                context.read<SoundCubit>().state,
-                            playerName: context.read<PlayerCutbit>().state,
-                          ),
+                SizedBox(
+                  width: 200,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: AppButton(
+                          onTap: () {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (context) => GameWidget(
+                                  game: PixelAdventure(
+                                    context: context,
+                                    playSoundsBackground:
+                                        context.read<SoundCubit>().state,
+                                    playerName:
+                                        context.read<PlayerCutbit>().state,
+                                  ),
+                                ),
+                              ),
+                              (route) => false,
+                            );
+                          },
+                          buttonText: "Chơi ngay",
                         ),
                       ),
-                      (route) => false,
-                    );
-                  },
-                  buttonText: "Chơi ngay",
+                    ],
+                  ),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const SelectCharacterScreen(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 50,
-                      vertical: 15,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.white,
-                          blurRadius: 10,
-                          spreadRadius: 1,
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: 200,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: AppButton(
+                          buttonText: "Lịch sử",
+                          onTap: () {},
                         ),
-                      ],
-                    ),
-                    child: BlocBuilder<PlayerCutbit, String>(
-                      builder: (context, state) {
-                        return Text(
-                          context.read<PlayerCutbit>().state,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF211F30),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        );
-                      },
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 const Spacer(),
@@ -110,19 +94,44 @@ class _StartScreenState extends State<StartScreen> {
           Positioned(
             top: 16,
             right: 16,
-            child: IconButton(
-              onPressed: () {
-                context.read<SoundCubit>().toggleSound();
-              },
-              icon: BlocBuilder<SoundCubit, bool>(
-                builder: (context, state) {
-                  return Icon(
-                    state == true ? Icons.volume_up : Icons.volume_off,
-                    color: Colors.white,
-                    size: 40,
-                  );
-                },
-              ),
+            child: Column(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    context.read<SoundCubit>().toggleSound();
+                  },
+                  icon: BlocBuilder<SoundCubit, bool>(
+                    builder: (context, state) {
+                      return Icon(
+                        state == true ? Icons.volume_up : Icons.volume_off,
+                        color: Colors.white,
+                        size: 40,
+                      );
+                    },
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SelectCharacterScreen(),
+                      ),
+                    );
+                  },
+                  child: BlocBuilder<PlayerCutbit, String>(
+                    builder: (context, state) {
+                      return Sprite(
+                        imagePath:
+                            'assets/images/Main Characters/${context.read<PlayerCutbit>().state}/Idle (32x32).png',
+                        size: const Size(32, 32),
+                        amount: 11,
+                        scale: 2,
+                        stepTime: 60,
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ],

@@ -54,6 +54,13 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
                     fontSize: 24,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 20.0,
+                        color: Colors.white,
+                        offset: Offset(0, 0),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(

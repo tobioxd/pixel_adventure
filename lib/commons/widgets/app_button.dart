@@ -37,6 +37,7 @@ class AppButton extends StatelessWidget {
             color: Color(0xFF211F30),
             fontWeight: FontWeight.bold,
           ),
+          textAlign: TextAlign.center,
         ),
       ),
     );
