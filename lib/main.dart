@@ -2,13 +2,20 @@ import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pixel_adventure/cores/services/get_it_service.dart';
+import 'package:pixel_adventure/cores/services/network_service.dart';
+import 'package:pixel_adventure/firebase_options.dart';
 import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
 import 'package:pixel_adventure/views/start/start_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await initializeDependencies();
+  NetWorkService.subcripeToConnectivityChanges();
   await Flame.device.fullScreen();
   await Flame.device.setLandscape();
   runApp(const Game());

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
+import 'package:flutter/material.dart';
 import 'package:pixel_adventure/cores/utils/check_collision.dart';
 import 'package:pixel_adventure/cores/utils/custom_hitbox.dart';
 import 'package:pixel_adventure/views/game/components/checkpoint.dart';
@@ -17,6 +18,7 @@ import 'package:pixel_adventure/views/game/obstacles/saw2.dart';
 import 'package:pixel_adventure/views/game/obstacles/saw3.dart';
 import 'package:pixel_adventure/views/game/pixel_adventure.dart';
 import 'package:pixel_adventure/views/game/states/globalstate.dart';
+import 'package:pixel_adventure/views/game_over/game_over_screen.dart';
 
 enum PlayerState {
   idle,
@@ -310,7 +312,18 @@ class Player extends SpriteAnimationGroupComponent
         });
       } else {
         print(GlobalState().getElapsedTime());
-        game.loadFromNew();
+        // game.loadFromNew();
+        if (game.context.mounted) {
+          Navigator.of(game.context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => GameOverScreen(
+                points: GlobalState().point,
+                duration: GlobalState().getElapsedTime(),
+                character: GlobalState().playerName,
+              ),
+            ),
+          );
+        }
       }
     });
   }
