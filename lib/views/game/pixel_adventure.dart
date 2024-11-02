@@ -22,11 +22,15 @@ class PixelAdventure extends FlameGame
         DragCallbacks,
         HasCollisionDetection,
         TapCallbacks {
-  PixelAdventure(
-      {required this.playSoundsBackground, required String playerName}) {
+  PixelAdventure({
+    required this.playSoundsBackground,
+    required String playerName,
+    required this.context,
+  }) {
     GlobalState().playerName = playerName;
   }
 
+  final BuildContext context;
   @override
   Color backgroundColor() => const Color(0xFF211F30);
   late CameraComponent cam;

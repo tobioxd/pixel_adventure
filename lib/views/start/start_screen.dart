@@ -2,10 +2,11 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pixel_adventure/commons/widgets/app_button.dart';
 import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
 import 'package:pixel_adventure/views/game/pixel_adventure.dart';
-import 'package:pixel_adventure/views/select_character_screen/select_character_screen.dart';
+import 'package:pixel_adventure/views/select_character/select_character_screen.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({Key? key}) : super(key: key);
@@ -42,24 +43,13 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                 ),
                 const SizedBox(height: 50),
-                GestureDetector(
+                AppButton(
                   onTap: () {
-                    // Navigator.of(context).pushAndRemoveUntil(
-                    //   MaterialPageRoute(
-                    //     builder: (context) => GameWidget(
-                    //       game: PixelAdventure(
-                    //         playSoundsBackground:
-                    //             context.read<SoundCubit>().state,
-                    //         playerName: 'Mask Dude',
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   (route) => false,
-                    // );
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (context) => GameWidget(
                           game: PixelAdventure(
+                            context: context,
                             playSoundsBackground:
                                 context.read<SoundCubit>().state,
                             playerName: context.read<PlayerCutbit>().state,
@@ -69,31 +59,7 @@ class _StartScreenState extends State<StartScreen> {
                       (route) => false,
                     );
                   },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 50,
-                      vertical: 15,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.white,
-                          blurRadius: 10,
-                          spreadRadius: 1,
-                        ),
-                      ],
-                    ),
-                    child: const Text(
-                      'Chơi ngay',
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Color(0xFF211F30),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  buttonText: "Chơi ngay",
                 ),
                 const SizedBox(
                   height: 24,

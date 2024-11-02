@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pixel_adventure/cores/services/get_it_service.dart';
 import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
-import 'package:pixel_adventure/views/start_screen/start_screen.dart';
+import 'package:pixel_adventure/views/start/start_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

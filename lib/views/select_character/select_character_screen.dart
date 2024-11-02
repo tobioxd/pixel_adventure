@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pixel_adventure/commons/widgets/app_button.dart';
 import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
 import 'package:sprite/sprite.dart';
@@ -89,7 +90,8 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
                 const SizedBox(
                   height: 24,
                 ),
-                GestureDetector(
+                AppButton(
+                  buttonText: "Chọn",
                   onTap: () {
                     context.read<PlayerCutbit>().changePlayer(
                           playerName:
@@ -97,31 +99,6 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
                         );
                     Navigator.of(context).pop();
                   },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 50,
-                      vertical: 15,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(30),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.white,
-                          blurRadius: 10,
-                          spreadRadius: 1,
-                        ),
-                      ],
-                    ),
-                    child: const Text(
-                      'Chọn',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xFF211F30),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),
