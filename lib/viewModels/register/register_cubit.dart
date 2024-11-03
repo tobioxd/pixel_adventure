@@ -5,17 +5,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pixel_adventure/cores/constants/scores_db_table.dart';
 import 'package:pixel_adventure/cores/constants/user_db_key.dart';
 import 'package:pixel_adventure/cores/services/get_it_service.dart';
 import 'package:pixel_adventure/models/user_model.dart';
 import 'package:pixel_adventure/viewModels/register/register_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pixel_adventure/cores/services/network_service.dart';
+import 'package:sqflite/sqflite.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   final FirebaseAuth _firebaseAuth = getIt<FirebaseAuth>();
   final FirebaseFirestore _firebaseFirestore = getIt<FirebaseFirestore>();
   final SharedPreferences _sharePreference = getIt<SharedPreferences>();
   static const int kMaxImageSize = 512 * 1024;
+  final Database _database = getIt<Database>();
 
   RegisterCubit() : super(RegisterInitial());
 
@@ -26,6 +30,10 @@ class RegisterCubit extends Cubit<RegisterState> {
     required String name,
     File? image,
   }) async {
+    if (await NetWorkService.isConnected() == false) {
+      emit(const RegisterFailed("Không có kết nối mạng"));
+      return;
+    }
     if (password != confirmPassword) {
       emit(const RegisterFailed("Mật khẩu không trùng khớp"));
       return;
@@ -66,6 +74,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       await _sharePreference.setString(UserDbKey.photoKey, imageBase64);
       await _sharePreference.setString(
           UserDbKey.createdAtKey, createdAt.toString());
+      await _database.delete(ScoresDbTable.tableName);
       emit(RegisterSuccessfully(
         userModel: UserModel(
           id: id,

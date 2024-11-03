@@ -5,6 +5,7 @@ import 'package:pixel_adventure/viewModels/game_result/game_result_cubit.dart';
 import 'package:pixel_adventure/viewModels/history/history_cubit.dart';
 import 'package:pixel_adventure/viewModels/login/login_cubit.dart';
 import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
+import 'package:pixel_adventure/viewModels/profile/profile_cubit.dart';
 import 'package:pixel_adventure/viewModels/register/register_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -60,4 +61,5 @@ Future<void> initializeDependencies() async {
   getIt.registerFactory<UserCubit>(() => UserCubit());
   getIt.registerFactory<RegisterCubit>(() => RegisterCubit());
   getIt.registerFactory<LoginCubit>(() => LoginCubit());
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit());
 }

@@ -9,6 +9,7 @@ import 'package:pixel_adventure/commons/widgets/high_light_text.dart';
 import 'package:pixel_adventure/cores/services/get_it_service.dart';
 import 'package:pixel_adventure/viewModels/history/history_cubit.dart';
 import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
+import 'package:pixel_adventure/viewModels/profile/profile_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
 import 'package:pixel_adventure/viewModels/user/user_cubit.dart';
 import 'package:pixel_adventure/viewModels/user/user_state.dart';
@@ -164,7 +165,11 @@ class _StartScreenState extends State<StartScreen> {
                       } else {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const UserInforScreen(),
+                            builder: (context) => BlocProvider(
+                              create: (context) =>
+                                  getIt<ProfileCubit>()..loadProfile(),
+                              child: const UserInforScreen(),
+                            ),
                           ),
                         );
                       }
