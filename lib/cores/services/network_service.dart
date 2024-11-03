@@ -13,6 +13,12 @@ abstract class NetWorkService {
   static final FirebaseFirestore _firestore = getIt<FirebaseFirestore>();
   static bool _isSyncing = false;
 
+  static Future<bool> isConnected() async {
+    final result = await Connectivity().checkConnectivity();
+    return result.contains(ConnectivityResult.wifi) ||
+        result.contains(ConnectivityResult.mobile);
+  }
+
   static void subcripeToConnectivityChanges() {
     Connectivity().onConnectivityChanged.listen((result) async {
       if (_isSyncing) return;

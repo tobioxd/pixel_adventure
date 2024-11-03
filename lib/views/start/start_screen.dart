@@ -1,4 +1,6 @@
-// lib/screens/start_screen.dart
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,9 +10,13 @@ import 'package:pixel_adventure/cores/services/get_it_service.dart';
 import 'package:pixel_adventure/viewModels/history/history_cubit.dart';
 import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
+import 'package:pixel_adventure/viewModels/user/user_cubit.dart';
+import 'package:pixel_adventure/viewModels/user/user_state.dart';
+import 'package:pixel_adventure/views/auth/auth_screen.dart';
 import 'package:pixel_adventure/views/game/pixel_adventure.dart';
 import 'package:pixel_adventure/views/history/history_screen.dart';
 import 'package:pixel_adventure/views/select_character/select_character_screen.dart';
+import 'package:pixel_adventure/views/user_infor/user_infor_screen.dart';
 import 'package:sprite/sprite.dart';
 
 class StartScreen extends StatefulWidget {
@@ -22,6 +28,13 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   @override
+  void initState() {
+    context.read<UserCubit>().loadUser();
+    log("get user infor");
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF211F30),
@@ -29,9 +42,9 @@ class _StartScreenState extends State<StartScreen> {
         children: [
           Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Spacer(),
+                const SizedBox(height: 60),
                 const HighLightText(
                   text: "Pixel Adventure",
                   fontSize: 50,
@@ -87,8 +100,6 @@ class _StartScreenState extends State<StartScreen> {
                     ],
                   ),
                 ),
-                const Spacer(),
-                const Spacer(),
               ],
             ),
           ),
@@ -133,6 +144,74 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                 ),
               ],
+            ),
+          ),
+          Positioned(
+            top: 16,
+            left: 16,
+            child: BlocBuilder<UserCubit, UserState>(
+              builder: (context, state) {
+                if (state is UserLoaded) {
+                  log(state.user.photo);
+                  return GestureDetector(
+                    onTap: () {
+                      if (state.user.id == 'null') {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const AuthScreen(),
+                          ),
+                        );
+                      } else {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const UserInforScreen(),
+                          ),
+                        );
+                      }
+                    },
+                    child: IntrinsicHeight(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(4),
+                            child: Image.memory(
+                              base64Decode(state.user.photo),
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              if (state.user.id != 'null')
+                                Text(
+                                  'id: ${state.user.id}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              Text(
+                                state.user.name,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+                return const SizedBox();
+              },
             ),
           ),
         ],

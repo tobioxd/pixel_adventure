@@ -7,6 +7,7 @@ import 'package:pixel_adventure/firebase_options.dart';
 import 'package:pixel_adventure/viewModels/game_result/game_result_cubit.dart';
 import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
+import 'package:pixel_adventure/viewModels/user/user_cubit.dart';
 import 'package:pixel_adventure/views/start/start_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -38,6 +39,9 @@ class Game extends StatelessWidget {
         ),
         BlocProvider<GameResultCubit>(
           create: (context) => getIt<GameResultCubit>(),
+        ),
+        BlocProvider<UserCubit>(
+          create: (context) => getIt<UserCubit>(),
         ),
       ],
       child: const MaterialApp(
