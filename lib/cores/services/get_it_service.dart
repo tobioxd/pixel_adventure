@@ -3,10 +3,15 @@ import 'package:path/path.dart';
 import 'package:pixel_adventure/cores/constants/scores_db_table.dart';
 import 'package:pixel_adventure/viewModels/game_result/game_result_cubit.dart';
 import 'package:pixel_adventure/viewModels/history/history_cubit.dart';
+import 'package:pixel_adventure/viewModels/login/login_cubit.dart';
 import 'package:pixel_adventure/viewModels/player/player_cubit.dart';
+import 'package:pixel_adventure/viewModels/profile/profile_cubit.dart';
+import 'package:pixel_adventure/viewModels/register/register_cubit.dart';
 import 'package:pixel_adventure/viewModels/sound/sound_cubit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pixel_adventure/viewModels/user/user_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 final getIt = GetIt.instance;
@@ -43,6 +48,8 @@ Future<void> initializeDependencies() async {
       """);
     },
   );
+  getIt.registerSingleton<SharedPreferences>(
+      await SharedPreferences.getInstance());
   getIt.registerSingleton<Database>(database);
   getIt.registerLazySingleton<FirebaseFirestore>(
       () => FirebaseFirestore.instance);
@@ -51,4 +58,8 @@ Future<void> initializeDependencies() async {
   getIt.registerFactory<PlayerCutbit>(() => PlayerCutbit());
   getIt.registerFactory<GameResultCubit>(() => GameResultCubit());
   getIt.registerFactory<HistoryCubit>(() => HistoryCubit());
+  getIt.registerFactory<UserCubit>(() => UserCubit());
+  getIt.registerFactory<RegisterCubit>(() => RegisterCubit());
+  getIt.registerFactory<LoginCubit>(() => LoginCubit());
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit());
 }
