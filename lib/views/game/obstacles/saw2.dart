@@ -6,11 +6,11 @@ import 'package:pixel_adventure/views/game/pixel_adventure.dart';
 class Saw2 extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
   final double offNeg;
   final double offPos;
-  final double verticalOffset; // Thêm biến để giống với Saw3
+  final double verticalOffset; 
   Saw2({
     this.offNeg = 0,
     this.offPos = 0,
-    this.verticalOffset = 2, // Đặt giá trị mặc định giống Saw3
+    this.verticalOffset = 2, 
     position,
     size,
   }) : super(

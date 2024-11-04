@@ -9,9 +9,7 @@ import 'package:pixel_adventure/views/game/enemies/chicken.dart';
 import 'package:pixel_adventure/views/game/enemies/rhino.dart';
 import 'package:pixel_adventure/views/game/items/fruit.dart';
 import 'package:pixel_adventure/views/game/obstacles/fire.dart';
-import 'package:pixel_adventure/views/game/obstacles/rock.dart';
 import 'package:pixel_adventure/views/game/obstacles/saw.dart';
-import 'package:pixel_adventure/views/game/obstacles/saw1.dart';
 import 'package:pixel_adventure/views/game/obstacles/saw2.dart';
 import 'package:pixel_adventure/views/game/obstacles/saw3.dart';
 import 'package:pixel_adventure/views/game/pixel_adventure.dart';
@@ -104,19 +102,6 @@ class Level extends World
             );
             add(saw);
             break;
-          case 'Saw1':
-            final isVertical = spawnPoint.properties.getValue('isVertical');
-            final offNeg = spawnPoint.properties.getValue('offNeg');
-            final offPos = spawnPoint.properties.getValue('offPos');
-            final saw = Saw1(
-              isVertical: isVertical,
-              offNeg: offNeg,
-              offPos: offPos,
-              position: Vector2(spawnPoint.x, spawnPoint.y),
-              size: Vector2(spawnPoint.width, spawnPoint.height),
-            );
-            add(saw);
-            break;
           case 'Saw2':
             final offNeg = spawnPoint.properties.getValue('offNeg') ?? 0.0;
             final offPos = spawnPoint.properties.getValue('offPos') ?? 0.0;
@@ -179,19 +164,6 @@ class Level extends World
               position: Vector2(spawnPoint.x, spawnPoint.y),
             );
             add(fire);
-            break;
-          case 'Rock':
-            final isVertical = spawnPoint.properties.getValue('isVertical');
-            final offNeg = spawnPoint.properties.getValue('offNeg');
-            final offPos = spawnPoint.properties.getValue('offPos');
-            final rock = Rock(
-              isVertical: isVertical,
-              offNeg: offNeg,
-              offPos: offPos,
-              position: Vector2(spawnPoint.x, spawnPoint.y),
-              size: Vector2(spawnPoint.width, spawnPoint.height),
-            );
-            add(rock);
             break;
           default:
         }
