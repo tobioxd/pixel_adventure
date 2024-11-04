@@ -15,6 +15,7 @@ class HistoryCubit extends Cubit<HistoryState> {
       emit(HistoryLoading());
       final rawData = await _database.query(ScoresDbTable.tableName);
       final scores = rawData.map((e) => ScoreModel.fromJson(e)).toList();
+      scores.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       emit(HistoryLoaded(scores));
     } catch (e) {
       emit(const HistoryError("Có lỗi xảy ra khi tải lịch sử chơi."));

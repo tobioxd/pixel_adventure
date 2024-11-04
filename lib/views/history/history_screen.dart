@@ -142,7 +142,7 @@ class HistoryScreen extends StatelessWidget {
       body: Stack(
         children: [
           Center(
-            child: BlocBuilder<HistoryCubit, HistoryState>(
+            child: BlocConsumer<HistoryCubit, HistoryState>(
               builder: (context, state) {
                 if (state is HistoryLoading) {
                   return const Column(
@@ -188,6 +188,15 @@ class HistoryScreen extends StatelessWidget {
                     ),
                   ),
                 );
+              },
+              listener: (BuildContext context, HistoryState state) {
+                if (state is HistoryError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                    ),
+                  );
+                }
               },
             ),
           ),
