@@ -121,7 +121,7 @@ class HistoryScreen extends StatelessWidget {
                 child: Text(
                   score.time.inMinutes == 0
                       ? '${score.time.inSeconds}s'
-                      : '${score.time.inMinutes}p ${score.time.inSeconds}s',
+                      : '${score.time.inMinutes}p ${score.time.inSeconds % 60}s',
                   style: const TextStyle(
                     fontSize: 16,
                     color: Colors.white,
