@@ -19,6 +19,16 @@ class GameOverScreen extends StatelessWidget {
     required this.duration,
   });
 
+  void _handleNavigateToHome(BuildContext context) {
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (context) => const StartScreen(),
+      ),
+      (route) => false,
+    );
+    context.read<SoundCubit>().playSound(context.read<SoundCubit>().state);
+  }
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -114,17 +124,7 @@ class GameOverScreen extends StatelessWidget {
             ),
             AppButton(
               buttonText: "Về trang chủ",
-              onTap: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => const StartScreen(),
-                  ),
-                  (route) => false,
-                );
-                context
-                    .read<SoundCubit>()
-                    .playSound(context.read<SoundCubit>().state);
-              },
+              onTap: () => _handleNavigateToHome(context),
             ),
           ],
         ),
