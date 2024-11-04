@@ -39,6 +39,13 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
     });
   }
 
+  void _handleChoosePlayer() {
+    context.read<PlayerCutbit>().changePlayer(
+          playerName: characters[selectedCharacter].split('/')[3],
+        );
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,13 +96,7 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
                 ),
                 AppButton(
                   buttonText: "Chọn",
-                  onTap: () {
-                    context.read<PlayerCutbit>().changePlayer(
-                          playerName:
-                              characters[selectedCharacter].split('/')[3],
-                        );
-                    Navigator.of(context).pop();
-                  },
+                  onTap: _handleChoosePlayer,
                 ),
               ],
             ),
