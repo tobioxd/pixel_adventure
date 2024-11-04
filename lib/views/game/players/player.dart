@@ -13,7 +13,6 @@ import 'package:pixel_adventure/views/game/enemies/rhino.dart';
 import 'package:pixel_adventure/views/game/items/fruit.dart';
 import 'package:pixel_adventure/views/game/obstacles/fire.dart';
 import 'package:pixel_adventure/views/game/obstacles/saw.dart';
-import 'package:pixel_adventure/views/game/obstacles/saw1.dart';
 import 'package:pixel_adventure/views/game/obstacles/saw2.dart';
 import 'package:pixel_adventure/views/game/obstacles/saw3.dart';
 import 'package:pixel_adventure/views/game/pixel_adventure.dart';
@@ -104,7 +103,6 @@ class Player extends SpriteAnimationGroupComponent
         other.collidedWithPlayer();
       }
       if (other is Saw) _response();
-      if (other is Saw1) _response();
       if (other is Saw2) _response();
       if (other is Saw3) _response();
       if (other is Chicken) {

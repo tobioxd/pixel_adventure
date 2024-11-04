@@ -27,12 +27,12 @@
 113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
 113,0,0,0,0,0,40,41,42,0,0,0,0,0,0,40,41,41,42,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
 113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,111,
-113,7,8,8,8,8,8,8,8,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,8,8,8,9,0,0,0,0,7,8,8,8,9,111,
-113,117,140,140,140,140,140,140,140,118,119,96,96,96,96,96,96,96,96,96,96,96,96,96,97,117,140,140,140,141,95,96,96,97,117,140,140,140,141,111,
+113,7,8,8,8,8,8,8,8,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,8,8,8,8,9,0,0,0,7,8,8,8,9,111,
+113,117,140,140,140,140,140,140,140,118,119,96,96,96,96,96,96,96,96,96,96,96,96,96,97,117,140,140,140,118,119,96,96,97,117,140,140,140,141,111,
 114,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,115
 </data>
  </layer>
- <objectgroup id="2" name="Spawnpoints">
+ <objectgroup id="2" name="Spawnpoints" visible="0">
   <object id="4" name="Player" type="Player" x="48.0962" y="31.8901" width="32" height="32"/>
   <object id="21" name="Bananas" type="Fruit" x="415.85" y="288.013" width="32" height="32"/>
   <object id="22" name="Orange" type="Fruit" x="183.987" y="207.777" width="32" height="32"/>
@@ -42,11 +42,11 @@
   <object id="26" name="Cherries" type="Fruit" x="287.884" y="128.027" width="32" height="32"/>
   <object id="30" name="Kiwi" type="Fruit" x="399.869" y="111.906" width="32" height="32"/>
   <object id="31" name="Kiwi" type="Fruit" x="489.005" y="176.405" width="32" height="32"/>
-  <object id="34" type="Saw" x="102.777" y="303.351" width="32" height="32">
+  <object id="34" type="Saw" x="80.777" y="304.684" width="32" height="32">
    <properties>
     <property name="isVertical" type="bool" value="false"/>
     <property name="offNeg" type="float" value="4"/>
-    <property name="offPos" type="float" value="3"/>
+    <property name="offPos" type="float" value="4"/>
    </properties>
   </object>
   <object id="72" type="Saw" x="127.739" y="191.645" width="32" height="32">
@@ -64,8 +64,8 @@
   <object id="71" type="Saw" x="433.403" y="216.016" width="32" height="32">
    <properties>
     <property name="isVertical" type="bool" value="true"/>
-    <property name="offNeg" type="float" value="4"/>
-    <property name="offPos" type="float" value="3"/>
+    <property name="offNeg" type="float" value="3"/>
+    <property name="offPos" type="float" value="2"/>
    </properties>
   </object>
   <object id="52" name="Kiwi" type="Fruit" x="375.804" y="208.305" width="32" height="32"/>
@@ -153,12 +153,6 @@
     <property name="offPos" type="float" value="5"/>
    </properties>
   </object>
-  <object id="98" name="Fire" type="Fire" x="479.958" y="320.187" width="16" height="32">
-   <properties>
-    <property name="offNeg" type="float" value="12"/>
-    <property name="offPos" type="float" value="5"/>
-   </properties>
-  </object>
   <object id="99" name="Fire" type="Fire" x="495.958" y="320.187" width="16" height="32">
    <properties>
     <property name="offNeg" type="float" value="12"/>
@@ -178,7 +172,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="3" name="Collisions">
+ <objectgroup id="3" name="Collisions" visible="0">
   <object id="7" x="0.0261716" y="0.0177358" width="15.6364" height="352.069"/>
   <object id="8" x="15.6625" y="-0.205319" width="608.557" height="16"/>
   <object id="9" x="624.205" y="0.321369" width="16" height="367.785"/>
@@ -186,7 +180,7 @@
   <object id="12" x="15.169" y="321.026" width="160.205" height="31.3364" rotation="359.888"/>
   <object id="13" type="Platform" x="191.842" y="144.125" width="48.5267" height="8.57579"/>
   <object id="14" x="390.863" y="143.937" width="48.8407" height="16"/>
-  <object id="15" x="400.044" y="320.324" width="79.8835" height="31.8819"/>
+  <object id="15" x="400.044" y="320.324" width="96.5502" height="31.8819"/>
   <object id="16" x="479.887" y="208.191" width="47.8819" height="15.9091"/>
   <object id="17" type="Platform" x="272.259" y="192.281" width="63.8182" height="8.51078"/>
   <object id="18" x="175.965" y="240.348" width="48" height="15.6875"/>
