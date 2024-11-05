@@ -15,6 +15,7 @@ import 'package:pixel_adventure/views/game/items/fruit.dart';
 import 'package:pixel_adventure/views/game/levels/level.dart';
 import 'package:pixel_adventure/views/game/players/player.dart';
 import 'package:pixel_adventure/views/game/states/globalstate.dart';
+import 'package:pixel_adventure/views/game_over/game_over_screen.dart';
 
 class PixelAdventure extends FlameGame
     with
@@ -124,8 +125,15 @@ class PixelAdventure extends FlameGame
     if (currentLevel < levelNames.length - 1) {
       currentLevel++;
     } else {
-      // no more levels
-      currentLevel = 0;
+      Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => GameOverScreen(
+                points: GlobalState().point,
+                duration: GlobalState().getElapsedTime(),
+                character: GlobalState().playerName,
+              ),
+            ),
+          );
     }
 
     _loadLevel();
