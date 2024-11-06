@@ -40,28 +40,41 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileLoaded(userModel: user));
   }
 
-  void updateProfile({required String name, required File photo}) async {
+  void updateProfile({required String name, File? photo}) async {
+    if (await NetWorkService.isConnected() == false) {
+      emit(const ProfileError(message: "Không có kết nối mạng"));
+      return;
+    }
     if (_firebaseAuth.currentUser == null) {
       await _sharedPreferences.clear();
       emit(ProfileRequireLogin());
       return;
     }
-    final imageBytes = await photo.readAsBytes();
-    String imageBase64 = base64Encode(imageBytes);
+    String imageBase64 = 'null';
+    if (photo != null) {
+      final imageBytes = await photo.readAsBytes();
+      imageBase64 = base64Encode(imageBytes);
+    }
     try {
       await _firestore
           .collection(UserDbKey.collectionName)
           .doc(_firebaseAuth.currentUser!.uid)
-          .update({
-        UserDbKey.nameKey: name,
-        UserDbKey.photoKey: imageBase64,
-      });
+          .update(imageBase64 != 'null'
+              ? {
+                  UserDbKey.nameKey: name,
+                  UserDbKey.photoKey: imageBase64,
+                }
+              : {
+                  UserDbKey.nameKey: name,
+                });
+      await _sharedPreferences.setString(UserDbKey.nameKey, name);
+      if (imageBase64 != 'null') {
+        await _sharedPreferences.setString(UserDbKey.photoKey, imageBase64);
+      }
     } on FirebaseException {
       emit(const ProfileError(message: "Có lỗi xảy ra khi cập nhật thông tin"));
       return;
     }
-    await _sharedPreferences.setString(UserDbKey.nameKey, name);
-    await _sharedPreferences.setString(UserDbKey.photoKey, imageBase64);
     loadProfile();
   }
 

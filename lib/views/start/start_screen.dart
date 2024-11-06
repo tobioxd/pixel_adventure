@@ -31,7 +31,6 @@ class _StartScreenState extends State<StartScreen> {
   @override
   void initState() {
     context.read<UserCubit>().loadUser();
-    log("get user infor");
     super.initState();
   }
 
@@ -151,6 +150,7 @@ class _StartScreenState extends State<StartScreen> {
             top: 16,
             left: 16,
             child: BlocBuilder<UserCubit, UserState>(
+              buildWhen: (previous, current) => current is UserLoaded,
               builder: (context, state) {
                 if (state is UserLoaded) {
                   log(state.user.photo);
@@ -166,8 +166,7 @@ class _StartScreenState extends State<StartScreen> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => BlocProvider(
-                              create: (context) =>
-                                  getIt<ProfileCubit>()..loadProfile(),
+                              create: (context) => getIt<ProfileCubit>(),
                               child: const UserInforScreen(),
                             ),
                           ),
