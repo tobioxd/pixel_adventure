@@ -19,6 +19,8 @@ class ProfileLoaded extends ProfileState {
   List<Object> get props => [userModel];
 }
 
+class ProfileChangePasswordSuccess extends ProfileState {}
+
 class ProfileRequireLogin extends ProfileState {}
 
 class ProfileError extends ProfileState {

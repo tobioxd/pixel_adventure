@@ -7,6 +7,7 @@ import 'package:pixel_adventure/commons/widgets/high_light_text.dart';
 import 'package:pixel_adventure/viewModels/profile/profile_cubit.dart';
 import 'package:pixel_adventure/viewModels/profile/profile_state.dart';
 import 'package:pixel_adventure/views/start/start_screen.dart';
+import 'package:pixel_adventure/views/user_infor/change_password_screen.dart';
 import 'package:pixel_adventure/views/user_infor/edit_user_infor_screen.dart';
 
 class UserInforScreen extends StatefulWidget {
@@ -139,7 +140,18 @@ class _UserInforScreenState extends State<UserInforScreen> {
                           Expanded(
                             child: AppButton(
                               buttonText: "Đổi mật khẩu",
-                              onTap: () {},
+                              onTap: () {
+                                final cubit = context.read<ProfileCubit>();
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        BlocProvider<ProfileCubit>.value(
+                                      value: cubit,
+                                      child: const ChangePasswordScreen(),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ],

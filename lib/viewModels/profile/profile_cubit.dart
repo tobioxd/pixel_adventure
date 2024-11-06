@@ -22,6 +22,38 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   ProfileCubit() : super(ProfileInitial());
 
+  void changePassword({
+    required String currentPassword,
+    required String newPassword,
+    required String confirmNewPassword,
+  }) async {
+    if (await NetWorkService.isConnected() == false) {
+      emit(const ProfileError(message: "Không có kết nối mạng"));
+      return;
+    }
+    if (_firebaseAuth.currentUser == null) {
+      await _sharedPreferences.clear();
+      emit(ProfileRequireLogin());
+      return;
+    }
+    if (newPassword != confirmNewPassword) {
+      emit(const ProfileError(message: "Mật khẩu mới không khớp"));
+      return;
+    }
+    final user = _firebaseAuth.currentUser!;
+    try {
+      final email = user.email!;
+      final credential =
+          EmailAuthProvider.credential(email: email, password: currentPassword);
+      await user.reauthenticateWithCredential(credential);
+      emit(ProfileChangePasswordSuccess());
+    } on FirebaseException {
+      emit(const ProfileError(message: "Mật khẩu cũ không chính xác"));
+    } finally {
+      await user.updatePassword(newPassword);
+    }
+  }
+
   void loadProfile() async {
     final userId = _sharedPreferences.getString(UserDbKey.idKey);
     final name = _sharedPreferences.getString(UserDbKey.nameKey);
