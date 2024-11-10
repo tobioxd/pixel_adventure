@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:async';
 
 import 'package:flame/components.dart';
@@ -55,11 +53,41 @@ class PixelAdventure extends FlameGame
     // Load all images into cache
     await images.loadAllImages();
 
+    _initializeCameraWithControls();
     loadFromNew();
 
     await _initBackgroundMusic();
 
     return super.onLoad();
+  }
+
+  void _initializeCameraWithControls() {
+    cam = CameraComponent.withFixedResolution(
+      width: 640,
+      height: 360,
+    );
+    cam.viewfinder.anchor = Anchor.topLeft;
+    add(cam);
+
+    // Thêm joystick vào camera viewport
+    joystick = JoystickComponent(
+      priority: 1,
+      knob: SpriteComponent(sprite: Sprite(images.fromCache('HUD/Knob.png'))),
+      background: SpriteComponent(sprite: Sprite(images.fromCache('HUD/Joystick.png'))),
+      margin: const EdgeInsets.only(left: 40, bottom: 35),
+    );
+    cam.viewport.add(joystick);
+
+    // Thêm các nút điều khiển vào camera viewport
+    cam.viewport.add(JumpButton());
+    cam.viewport.add(DownButton());
+
+    // Thêm soundButton vào camera viewport
+    soundButton = SoundButton();
+    cam.viewport.add(soundButton);
+
+    // Thêm Life vào camera viewport
+    cam.viewport.add(Life());
   }
 
   @override
@@ -74,25 +102,6 @@ class PixelAdventure extends FlameGame
   void onDetach() {
     FlameAudio.bgm.stop();
     super.onDetach();
-  }
-
-  void addJoystick() {
-    joystick = JoystickComponent(
-      priority: 1,
-      knob: SpriteComponent(
-        sprite: Sprite(
-          images.fromCache('HUD/Knob.png'),
-        ),
-      ),
-      background: SpriteComponent(
-        sprite: Sprite(
-          images.fromCache('HUD/Joystick.png'),
-        ),
-      ),
-      margin: const EdgeInsets.only(left: 40, bottom: 35),
-    );
-
-    cam.viewport.add(joystick);
   }
 
   void updateJoyStick() {
@@ -118,22 +127,22 @@ class PixelAdventure extends FlameGame
       if (component is Level) {
         component.onRemove();
       }
-
-      return component is Level || component is CameraComponent;
+      return component is Level;
     });
 
     if (currentLevel < levelNames.length - 1) {
       currentLevel++;
     } else {
       Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => GameOverScreen(
-                points: GlobalState().point,
-                duration: GlobalState().getElapsedTime(),
-                character: GlobalState().playerName,
-              ),
-            ),
-          );
+        MaterialPageRoute(
+          builder: (context) => GameOverScreen(
+            points: GlobalState().point,
+            duration: GlobalState().getElapsedTime(),
+            character: GlobalState().playerName,
+          ),
+        ),
+      );
+      return;
     }
 
     _loadLevel();
@@ -144,8 +153,7 @@ class PixelAdventure extends FlameGame
       if (component is Level) {
         component.onRemove();
       }
-
-      return component is Level || component is CameraComponent;
+      return component is Level;
     });
 
     print(GlobalState().point);
@@ -157,37 +165,25 @@ class PixelAdventure extends FlameGame
 
   void _loadLevel() {
     try {
-      // ignore: unnecessary_new
-      player = new Player(character: GlobalState().playerName);
+      player = Player(character: GlobalState().playerName);
+
       Level world = Level(
         player: player,
         levelName: levelNames[currentLevel],
       );
 
-      cam = CameraComponent.withFixedResolution(
-        world: world,
-        width: 640,
-        height: 360,
-      );
-      cam.viewfinder.anchor = Anchor.topLeft;
+      add(world);
 
-      addAll([cam, world]);
-
-      if (showControls) {
-        addJoystick();
-        // add(JumpButton());
-        cam.viewport.add(JumpButton());
-        cam.viewport.add(DownButton());
-      }
-      soundButton = SoundButton();
-      cam.viewport.add(soundButton);
+      cam.world = world;
 
       if (currentLevel == 0) {
         GlobalState().resetLife();
         GlobalState().resetPoint();
         GlobalState().start();
       }
-      cam.viewport.add(Life());
+
+      resetHearts();
+
     } catch (e) {
       print('Error loading level: $e');
     }
@@ -218,5 +214,14 @@ class PixelAdventure extends FlameGame
     }
 
     soundButton.updateSprite();
+  }
+
+  void resetHearts() {
+    cam.viewport.children.removeWhere((component) => component is Life);
+
+    final life = Life();
+    cam.viewport.add(life);
+
+    life.updateHearts();
   }
 }
