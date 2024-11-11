@@ -296,6 +296,7 @@ class Player extends SpriteAnimationGroupComponent
     Future.delayed(hitDuration, () {
       if (GlobalState().life > 1) {
         GlobalState().minusLife();
+        gameRef.resetHearts();
         scale.x = 1;
         position = startingPosition - Vector2.all(32);
         current = PlayerState.appearing;
