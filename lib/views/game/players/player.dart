@@ -46,7 +46,7 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation appearingAnimation;
   late final SpriteAnimation disappearingAnimation;
 
-  static const double _gravity = 10;
+  static const double _gravity = 14;
   static const double _jumpForce = 250;
   static const double _terminalVelocity = 300;
   double horizontalMovement = 0;

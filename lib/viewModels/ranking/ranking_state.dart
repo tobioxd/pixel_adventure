@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:pixel_adventure/models/ranking_model.dart';
+import 'package:pixel_adventure/models/score_model.dart';
+import 'package:pixel_adventure/models/user_model.dart';
 
 abstract class RankingState extends Equatable {
   const RankingState();
@@ -22,7 +23,7 @@ class RankingFailed extends RankingState {
 }
 
 class RankingLoaded extends RankingState {
-  final List<RankingModel> rankings;
+  final Map<UserModel, ScoreModel> rankings;
 
   const RankingLoaded({required this.rankings});
 
