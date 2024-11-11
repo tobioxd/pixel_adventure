@@ -58,11 +58,12 @@ class _RankingScreenState extends State<RankingScreen> {
                                   color: Colors.white.withOpacity(0.8),
                                   fontWeight: FontWeight.bold,
                                 ),
+                                textAlign: TextAlign.center,
                               ),
                             ),
                             Expanded(
                               child: Text(
-                                'Điểm TB',
+                                'Điểm',
                                 style: TextStyle(
                                   color: Colors.white.withOpacity(0.8),
                                   fontWeight: FontWeight.bold,
@@ -81,8 +82,9 @@ class _RankingScreenState extends State<RankingScreen> {
                               ),
                             ),
                             Expanded(
+                              flex: 2,
                               child: Text(
-                                'Lượt chơi',
+                                'Ngày',
                                 style: TextStyle(
                                   color: Colors.white.withOpacity(0.8),
                                   fontWeight: FontWeight.bold,
@@ -97,7 +99,11 @@ class _RankingScreenState extends State<RankingScreen> {
                       ...List.generate(
                         state.rankings.length,
                         (index) {
-                          final ranking = state.rankings[index];
+                          final user = state.rankings.keys.elementAt(index);
+                          final score = state.rankings.values.elementAt(index);
+                          final day = score.createdAt.day;
+                          final month = score.createdAt.month;
+                          final year = score.createdAt.year;
                           return Card(
                             color: Colors.white.withOpacity(0.1),
                             margin: const EdgeInsets.symmetric(
@@ -127,16 +133,17 @@ class _RankingScreenState extends State<RankingScreen> {
                                   Expanded(
                                     flex: 2,
                                     child: Text(
-                                      ranking.userName,
+                                      user.name,
                                       style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                       ),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ),
                                   Expanded(
                                     child: Text(
-                                      ranking.avgPoints.toStringAsFixed(1),
+                                      score.points.toStringAsFixed(1),
                                       style: TextStyle(
                                         color: Colors.white.withOpacity(0.8),
                                       ),
@@ -145,7 +152,7 @@ class _RankingScreenState extends State<RankingScreen> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      '${ranking.avgTime.toStringAsFixed(1)}s',
+                                      '${score.time.inSeconds}s',
                                       style: TextStyle(
                                         color: Colors.white.withOpacity(0.8),
                                       ),
@@ -153,8 +160,9 @@ class _RankingScreenState extends State<RankingScreen> {
                                     ),
                                   ),
                                   Expanded(
+                                    flex: 2,
                                     child: Text(
-                                      '${ranking.totalPlayed}',
+                                      '$day/$month/$year',
                                       style: TextStyle(
                                         color: Colors.white.withOpacity(0.8),
                                       ),

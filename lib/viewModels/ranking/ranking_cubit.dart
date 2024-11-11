@@ -4,7 +4,8 @@ import 'package:pixel_adventure/cores/constants/scores_db_table.dart';
 import 'package:pixel_adventure/cores/constants/user_db_key.dart';
 import 'package:pixel_adventure/cores/services/get_it_service.dart';
 import 'package:pixel_adventure/cores/services/network_service.dart';
-import 'package:pixel_adventure/models/ranking_model.dart';
+import 'package:pixel_adventure/models/score_model.dart';
+import 'package:pixel_adventure/models/user_model.dart';
 import 'package:pixel_adventure/viewModels/ranking/ranking_state.dart';
 
 class RankingCubit extends Cubit<RankingState> {
@@ -19,45 +20,52 @@ class RankingCubit extends Cubit<RankingState> {
       return;
     }
     try {
-      List<RankingModel> rankings = [];
-      final userDocs =
-          await _firestore.collection(UserDbKey.collectionName).get();
-      for (final userDocs in userDocs.docs) {
-        final userId = userDocs.id;
-        final userName = userDocs.get(UserDbKey.nameKey);
-        final userScores = await _firestore
-            .collection(ScoresDbTable.tableName)
-            .where(ScoresDbTable.userIdColumn, isEqualTo: userId)
-            .get();
-        final totalPlayed = userScores.docs.length;
-        double totalPoint = 0;
-        double totalTime = 0;
-        for (final userScore in userScores.docs) {
-          final point = userScore.get(ScoresDbTable.pointsColumn);
-          final time = userScore.get(ScoresDbTable.timeColumn);
-          totalPoint += point as int;
-          totalTime += time as int;
+      List<ScoreModel> highestScores = [];
+      final highestScoreDocs = await _firestore
+          .collection(ScoresDbTable.tableName)
+          .orderBy(ScoresDbTable.pointsColumn, descending: true)
+          .get();
+      for (final doc in highestScoreDocs.docs) {
+        if (highestScores.length == 5) {
+          break;
         }
-        rankings.add(RankingModel(
-          userId: userId,
-          userName: userName,
-          totalPlayed: totalPlayed,
-          avgPoints: totalPoint / totalPlayed,
-          avgTime: totalTime / totalPlayed,
-        ));
+        final scoreObject = ScoreModel.fromJson({
+          ScoresDbTable.idColumn: doc.id,
+          ...doc.data(),
+        });
+        if (highestScores
+            .any((element) => element.userId == scoreObject.userId)) {
+          continue;
+        } else {
+          highestScores.add(scoreObject);
+        }
       }
-      rankings.sort((a, b) {
-        int totalPlayedCompare = b.totalPlayed.compareTo(a.totalPlayed);
-        if (totalPlayedCompare != 0) {
-          return totalPlayedCompare;
+      highestScores.sort((a, b) {
+        int pointsComapare = b.points.compareTo(a.points);
+        if (pointsComapare != 0) {
+          return pointsComapare;
         }
-        int pointCompare = b.avgPoints.compareTo(a.avgPoints);
-        if (pointCompare != 0) {
-          return pointCompare;
+        int timeCompare = a.time.compareTo(b.time);
+        if (timeCompare != 0) {
+          return timeCompare;
         }
-        return a.avgTime.compareTo(b.avgTime);
+        return a.createdAt.compareTo(b.createdAt);
       });
-      emit(RankingLoaded(rankings: rankings.take(5).toList()));
+      List<UserModel> users = [];
+      for (final score in highestScores) {
+        final userDoc = await _firestore
+            .collection(UserDbKey.collectionName)
+            .doc(score.userId)
+            .get();
+        final userObject = UserModel.fromJson({
+          UserDbKey.idKey: userDoc.id,
+          ...userDoc.data()!,
+        });
+        users.add(userObject);
+      }
+      Map<UserModel, ScoreModel> rankings =
+          Map.fromIterables(users, highestScores);
+      emit(RankingLoaded(rankings: rankings));
     } on FirebaseException {
       emit(const RankingFailed(message: "Có lỗi xảy ra khi tải bảng xếp hạng"));
     }
