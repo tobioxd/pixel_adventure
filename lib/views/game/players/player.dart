@@ -46,7 +46,7 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation appearingAnimation;
   late final SpriteAnimation disappearingAnimation;
 
-  static const double _gravity = 14;
+  static const double _gravity = 16;
   static const double _jumpForce = 250;
   static const double _terminalVelocity = 300;
   double horizontalMovement = 0;
@@ -295,8 +295,6 @@ class Player extends SpriteAnimationGroupComponent
     current = PlayerState.hit;
     Future.delayed(hitDuration, () {
       if (GlobalState().life > 1) {
-        GlobalState().minusLife();
-        gameRef.resetHearts();
         scale.x = 1;
         position = startingPosition - Vector2.all(32);
         current = PlayerState.appearing;
@@ -307,6 +305,8 @@ class Player extends SpriteAnimationGroupComponent
           velocity = Vector2.zero();
           position = startingPosition;
           _updatePlayerState();
+          GlobalState().minusLife();
+          gameRef.resetHearts();
           Future.delayed(canMoveDuration, () => gotHit = false);
         });
       } else {

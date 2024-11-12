@@ -10,37 +10,37 @@
     "fileStates": {
         "Level-01.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 341.66666666666663,
+                "x": 312.66666666666663,
                 "y": 183.66666666666663
             }
         },
         "Level-02.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 319.66666666666663,
+                "x": 358.66666666666663,
                 "y": 183.66666666666663
             }
         },
         "Level-03.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 320.33333333333337,
+                "x": 359.3333333333333,
                 "y": 183.66666666666663
             }
         },
@@ -51,7 +51,7 @@
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 320.33333333333337,
+                "x": 359.3333333333333,
                 "y": 183.66666666666663
             }
         },
@@ -81,12 +81,12 @@
     ],
     "project": "Pixel Adventure.tiled-project",
     "recentFiles": [
-        "Pixel Adventure.tsx",
-        "Level-01.tmx",
         "test.tsx",
         "Level-04.tmx",
         "Level-03.tmx",
-        "Level-02.tmx"
+        "Level-02.tmx",
+        "Level-01.tmx",
+        "Pixel Adventure.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
