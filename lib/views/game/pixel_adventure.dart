@@ -6,8 +6,10 @@ import 'package:flame/game.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:pixel_adventure/views/game/controls/down_button.dart';
+import 'package:pixel_adventure/views/game/controls/game_time.dart';
 import 'package:pixel_adventure/views/game/controls/jump_button.dart';
 import 'package:pixel_adventure/views/game/controls/life.dart';
+import 'package:pixel_adventure/views/game/controls/score.dart';
 import 'package:pixel_adventure/views/game/controls/sound_button.dart';
 import 'package:pixel_adventure/views/game/items/fruit.dart';
 import 'package:pixel_adventure/views/game/levels/level.dart';
@@ -36,6 +38,8 @@ class PixelAdventure extends FlameGame
   Player player = Player(character: GlobalState().playerName);
   late JoystickComponent joystick;
   late SoundButton soundButton;
+  late Score score;
+  late GameTime gameTime;
   bool showControls = true;
   bool playSounds = true;
   bool playSoundsBackground;
@@ -85,6 +89,12 @@ class PixelAdventure extends FlameGame
     // Thêm soundButton vào camera viewport
     soundButton = SoundButton();
     cam.viewport.add(soundButton);
+
+    score = Score();
+    cam.viewport.add(score);
+
+    gameTime = GameTime();
+    cam.viewport.add(gameTime);
 
     // Thêm Life vào camera viewport
     cam.viewport.add(Life());
@@ -224,4 +234,5 @@ class PixelAdventure extends FlameGame
 
     life.updateHearts();
   }
+
 }

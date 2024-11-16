@@ -65,6 +65,19 @@ class Player extends SpriteAnimationGroupComponent
     width: 14,
     height: 28,
   );
+  DateTime? lastHitTime;
+  final Duration hitCooldown = Duration(seconds: 1);
+
+  bool canBeHit() {
+    if (lastHitTime == null) {
+      return true;
+    }
+    return DateTime.now().difference(lastHitTime!) > hitCooldown;
+  }
+
+  void registerHit() {
+    lastHitTime = DateTime.now();
+  }
 
   @override
   FutureOr<void> onLoad() {
@@ -117,9 +130,10 @@ class Player extends SpriteAnimationGroupComponent
           GlobalState().point += 50;
         }
       }
-      if (other is Fire) {
-        _response();
-      }
+      if (other is Fire && canBeHit()) {
+      _response();
+      registerHit();
+    }
     }
     super.onCollisionStart(intersectionPoints, other);
   }
