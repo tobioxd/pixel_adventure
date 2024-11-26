@@ -9,6 +9,7 @@ import 'package:pixel_adventure/views/game/controls/down_button.dart';
 import 'package:pixel_adventure/views/game/controls/game_time.dart';
 import 'package:pixel_adventure/views/game/controls/jump_button.dart';
 import 'package:pixel_adventure/views/game/controls/life.dart';
+import 'package:pixel_adventure/views/game/controls/pixel.dart';
 import 'package:pixel_adventure/views/game/controls/score.dart';
 import 'package:pixel_adventure/views/game/controls/sound_button.dart';
 import 'package:pixel_adventure/views/game/items/fruit.dart';
@@ -40,6 +41,7 @@ class PixelAdventure extends FlameGame
   late SoundButton soundButton;
   late Score score;
   late GameTime gameTime;
+  late Pixel pixel;
   bool showControls = true;
   bool playSounds = true;
   bool playSoundsBackground;
@@ -47,8 +49,8 @@ class PixelAdventure extends FlameGame
   List<String> levelNames = [
     'Level-01',
     'Level-02',
-    'Level-03',
     'Level-04',
+    'Level-03',
   ];
   int currentLevel = 0;
 
@@ -92,6 +94,9 @@ class PixelAdventure extends FlameGame
 
     score = Score();
     cam.viewport.add(score);
+
+    pixel = Pixel();
+    cam.viewport.add(pixel);
 
     gameTime = GameTime();
     cam.viewport.add(gameTime);
@@ -168,6 +173,7 @@ class PixelAdventure extends FlameGame
 
     print(GlobalState().point);
     GlobalState().resetPoint();
+    GlobalState().resetPixel();
     currentLevel = 0;
 
     _loadLevel();

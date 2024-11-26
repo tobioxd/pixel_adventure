@@ -4,6 +4,7 @@ class GlobalState {
   int life = 0;
   String playerName = '';
   int point = 0;
+  int pixel = 100;
 
   DateTime? startTime; 
 
@@ -15,6 +16,10 @@ class GlobalState {
 
   void resetPoint() {
     point = 0;
+  }
+
+  void resetPixel() {
+    pixel = 100;
   }
 
   void resetLife() {

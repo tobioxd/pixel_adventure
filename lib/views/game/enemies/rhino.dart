@@ -13,17 +13,18 @@ class Rhino extends SpriteAnimationGroupComponent
     with HasGameRef<PixelAdventure>, CollisionCallbacks {
   final double offNeg;
   final double offPos;
+  final int runSpeed;
 
   Rhino({
     super.position,
     super.size,
     this.offNeg = 0,
     this.offPos = 0,
+    this.runSpeed = 260,
   });
 
   static const stepTime = 0.1;
   static const tileSize = 16;
-  static const runSpeed = 260;
   static const _bounceHeight = 280.0;
   final textureSize = Vector2(52, 34);
   int stompCount = 0;

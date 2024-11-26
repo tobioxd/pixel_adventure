@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -93,12 +94,15 @@ class Level extends World
             final isVertical = spawnPoint.properties.getValue('isVertical');
             final offNeg = spawnPoint.properties.getValue('offNeg');
             final offPos = spawnPoint.properties.getValue('offPos');
+            final random = Random();
+            final moveSpeed = 50 + random.nextInt(50);
             final saw = Saw(
               isVertical: isVertical,
               offNeg: offNeg,
               offPos: offPos,
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
+              moveSpeed : moveSpeed,
             );
             add(saw);
             break;
@@ -140,22 +144,28 @@ class Level extends World
           case 'Chicken':
             final offNeg = spawnPoint.properties.getValue('offNeg');
             final offPos = spawnPoint.properties.getValue('offPos');
+            final random = Random();
+            final runSpeed = 80 + random.nextInt(81); 
             final chicken = Chicken(
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
               offNeg: offNeg,
               offPos: offPos,
+              runSpeed: runSpeed,
             );
             add(chicken);
             break;
           case 'Rhino':
             final offNeg = spawnPoint.properties.getValue('offNeg');
             final offPos = spawnPoint.properties.getValue('offPos');
+            final random = Random();
+            final runSpeed = 260 + random.nextInt(81); 
             final rhino = Rhino(
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
               offNeg: offNeg,
               offPos: offPos,
+              runSpeed: runSpeed,
             );
             add(rhino);
             break;

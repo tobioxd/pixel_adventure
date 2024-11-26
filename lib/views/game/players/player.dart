@@ -46,7 +46,7 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation appearingAnimation;
   late final SpriteAnimation disappearingAnimation;
 
-  static const double _gravity = 14;
+  static const double _gravity = 8;
   static const double _jumpForce = 250;
   static const double _terminalVelocity = 300;
   double horizontalMovement = 0;
@@ -115,13 +115,24 @@ class Player extends SpriteAnimationGroupComponent
       if (other is Fruit) {
         other.collidedWithPlayer();
       }
-      if (other is Saw) _response();
-      if (other is Saw2) _response();
-      if (other is Saw3) _response();
+      if (other is Saw) {
+        GlobalState().pixel -= 50;
+        _response();
+      }
+      if (other is Saw2) {
+        GlobalState().pixel -= 50;
+        _response();
+      }
+      if (other is Saw3) {
+        GlobalState().pixel -= 50;
+        _response();
+      }
       if (other is Chicken) {
+        GlobalState().pixel -= 30;
         other.collidedWithPlayer();
       }
       if (other is Rhino) {
+        GlobalState().pixel -= 80;
         other.collidedWithPlayer();
       }
       if (other is Checkpoint) {
@@ -131,9 +142,9 @@ class Player extends SpriteAnimationGroupComponent
         }
       }
       if (other is Fire && canBeHit()) {
-      _response();
-      registerHit();
-    }
+        _response();
+        registerHit();
+      }
     }
     super.onCollisionStart(intersectionPoints, other);
   }
@@ -308,9 +319,7 @@ class Player extends SpriteAnimationGroupComponent
     gotHit = true;
     current = PlayerState.hit;
     Future.delayed(hitDuration, () {
-      if (GlobalState().life > 1) {
-        GlobalState().minusLife();
-        gameRef.resetHearts();
+      if (GlobalState().pixel > 0) {
         scale.x = 1;
         position = startingPosition - Vector2.all(32);
         current = PlayerState.appearing;
@@ -324,18 +333,36 @@ class Player extends SpriteAnimationGroupComponent
           Future.delayed(canMoveDuration, () => gotHit = false);
         });
       } else {
-        print(GlobalState().getElapsedTime());
-        // game.loadFromNew();
-        if (game.context.mounted) {
-          Navigator.of(game.context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => GameOverScreen(
-                points: GlobalState().point,
-                duration: GlobalState().getElapsedTime(),
-                character: GlobalState().playerName,
+        if (GlobalState().life > 1) {
+          GlobalState().minusLife();
+          GlobalState().resetPixel();
+          gameRef.resetHearts();
+          scale.x = 1;
+          position = startingPosition - Vector2.all(32);
+          current = PlayerState.appearing;
+          if (game.playSounds) {
+            FlameAudio.play('sponse.wav', volume: game.soundVolume);
+          }
+          Future.delayed(appearingDuration, () {
+            velocity = Vector2.zero();
+            position = startingPosition;
+            _updatePlayerState();
+            Future.delayed(canMoveDuration, () => gotHit = false);
+          });
+        } else {
+          print(GlobalState().getElapsedTime());
+          // game.loadFromNew();
+          if (game.context.mounted) {
+            Navigator.of(game.context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => GameOverScreen(
+                  points: GlobalState().point,
+                  duration: GlobalState().getElapsedTime(),
+                  character: GlobalState().playerName,
+                ),
               ),
-            ),
-          );
+            );
+          }
         }
       }
     });

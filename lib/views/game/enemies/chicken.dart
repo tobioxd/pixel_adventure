@@ -13,16 +13,17 @@ class Chicken extends SpriteAnimationGroupComponent
     with HasGameRef<PixelAdventure>, CollisionCallbacks {
   final double offNeg;
   final double offPos;
+  final int runSpeed ;
   Chicken({
     super.position,
     super.size,
     this.offNeg = 0,
     this.offPos = 0,
+    this.runSpeed = 80,
   });
 
   static const stepTime = 0.05;
   static const tileSize = 16;
-  static const runSpeed = 80;
   static const _bounceHeight = 260.0;
   final textureSize = Vector2(32, 34);
 
